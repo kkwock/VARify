@@ -2,9 +2,7 @@
 Repository for NYU Capstone Project with Dr. Flowers
 
 # Background and Purpose
-A nonsense mutation, or premature stop mutation, is a change in the DNA sequence that causes a protein to terminate earlier than expected. This would result in a truncated protein that is likely unfunctional, which may disrupt the normal regulation of an organism and lead to disease. 
-
-Nonsense-mediated decay (NMD) is a eukaryotic surveillance pathway that degrades mRNA transcripts with premature stop codons. However, a previous study has shown that mutant zebrafish induced with mutations expected to disrupt gene function, were able to escape nonsense-mediated decay [Anderson et. al]. 
+A nonsense mutation, or premature stop mutation, is a change in the DNA sequence that causes a protein to terminate earlier than expected. This would result in a truncated protein that is likely unfunctional, which may disrupt the normal regulation of an organism and lead to disease. All eukaryotes have a Nonsense-mediated decay (NMD) surveillance pathway that degrades mRNA transcripts with premature stop codons. However, a previous study has shown that mutant zebrafish induced with mutations expected to disrupt gene function, were able to escape nonsense-mediated decay [Anderson et. al]. 
 
 The purpose of this tool is to capture early stop-codons and predict a loss-of-function for the protein for the human genome. 
 
