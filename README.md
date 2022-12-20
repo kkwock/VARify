@@ -6,12 +6,6 @@ Repository for NYU Capstone Project with Dr. Flowers
 * `scripts/utility.R`
 * `scripts/temp.sh`
 
-# Tool Method Plan
-1. Input human reads
-2. Align to human reference genome
-3. Capture variants, only capture stop codons
-4. Predict effects
-
 # Background and Purpose
 A nonsense mutation, or premature stop mutation, is a change in the DNA sequence that causes a protein to terminate earlier than expected. This would result in a truncated, and likely nonfunctional protein that can disrupt the normal regulation of an organism and cause disease. To mitigate this issue, eukaryotes have a nonsense-mediated decay (NMD) surveillance pathway that degrades mRNA transcripts with premature stop codons.
 
