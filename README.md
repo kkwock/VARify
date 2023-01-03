@@ -7,10 +7,7 @@ Repository for NYU Capstone Project with Dr. Flowers
 * `scripts/temp.sh`
 
 # Tool Method Plan
-1. Input human reads
-2. Align to human reference genome
-3. Capture variants, only capture stop codons
-4. Predict effects
+![image](https://user-images.githubusercontent.com/92037458/210402025-93ef1bd0-7528-4f35-9754-23ad3988c401.png)
 
 # Background and Purpose
 With genetic testing becoming an integral component in clinical diagnosis, accuracy in its predictions are critical for proper assessment and treatment for patients. Current predictive tools use genomic data via whole exome sequencing (WES) and whole genome sequencing (WGS) to predict disease risk, however the diagnostic accuracy is ~40%, leaving more than half of patients without a proper diagnosis (Kim et al., 2020). While comprehensive, both methods lack functional evidence to properly classify disease-causing variants. 
