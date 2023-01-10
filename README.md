@@ -1,12 +1,5 @@
-# NYU Bioinformatics Capstone Project
-Repository for NYU Capstone Project with Dr. Flowers
-
-# Contents
-* `report.qmd`
-* `scripts/utility.R`
-* `scripts/temp.sh`
-
-# Background and Purpose
+# NYU Bioinformatics Capstone Project: VARify
+## Background and Purpose
 With genetic testing becoming an integral component in clinical diagnosis, accuracy in its predictions are critical for proper assessment and treatment for patients. Current predictive tools use genomic data via whole exome sequencing (WES) and whole genome sequencing (WGS) to predict disease risk, however the diagnostic accuracy is ~40%, leaving more than half of patients without a proper diagnosis (Kim et al., 2020). While comprehensive, both methods lack functional evidence to properly classify disease-causing variants. 
 
 For example, predicted effects of missense and nonsense mutations (i.e., premature termination codons) using tools like SnpEff (Cingolani et al., 2012) or VariantAnnotator (Obenchain et al., 2014) are based on gene model annotations from the reference genome. This can lead to inaccurate predictions in cases where a mutation is not expressed, or where the use of the reference annotation leads to an incorrect effect prediction (e.g., when a sample transcriptome utilizes alternate transcripts or splice-site junctions are shifted relative to the reference). A study has shown evidence of mutant transcripts escaping nonsense-mediated decay (NMD), with their translations not always leading to the expected loss of function (Anderson et al., 2017). It is therefore critical to be able to identify whether mutational effects predicted from WGS or WES are actually expressed in the transcriptome of interest.
@@ -15,6 +8,10 @@ To bridge this gap, researchers are incorporating RNA-seq as a way to detect tra
 
 As an effort to fulfill this need, the purpose of our tool, VARify, is to compare and capture the predicted variants, based on WGS/WES data, in expressed transcripts. This would provide additional information that may increase mutant prediction accuracy and aid in classifying disease-causing variants. 
 
+## Contents
+* `report.qmd`
+* `scripts/utility.R`
+* `scripts/temp.sh`
 
 # Tool Method Plan
 ![image](https://user-images.githubusercontent.com/92037458/210402025-93ef1bd0-7528-4f35-9754-23ad3988c401.png)
