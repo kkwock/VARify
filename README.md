@@ -9,9 +9,7 @@ To bridge this gap, researchers are incorporating RNA-seq as a way to detect tra
 As an effort to fulfill this need, the purpose of our tool, VARify, is to compare and capture the predicted variants, based on WGS/WES data, in expressed transcripts. This would provide additional information that may increase mutant prediction accuracy and aid in classifying disease-causing variants. 
 
 ## Contents
-* `report.qmd`
-* `scripts/utility.R`
-* `scripts/temp.sh`
+* `notebook/VARify_notebook.Rmd`
 
 ## Tool Method Plan
 ![image](https://user-images.githubusercontent.com/92037458/210402025-93ef1bd0-7528-4f35-9754-23ad3988c401.png)
