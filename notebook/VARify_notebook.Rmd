@@ -1,0 +1,17 @@
+---
+title: "VARify"
+output: html_notebook
+---
+
+# Data Retrieval
+
+Trying to retrieve test data to build with. 
+
+1. Raw RNA-seq? (FASTA)
+2. Aligned BAM files?
+3. Reference Genome
+
+```{bash}
+
+```
+
