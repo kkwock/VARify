@@ -28,6 +28,23 @@ def geneParse(x):
                                 gene[id]  =outl.group(1)
         return gene
 
+# test seq match
+# seq = 'ATC----GCTGTA--A-----T'
+# matches = list(re.finditer('-+', seq))
+#
+# print 'Number of gaps =', len(matches)
+# print
+#
+# for region_number, match in enumerate(matches, 1):
+#     print 'Index Position of Gap region {} = {} to {}'.format(
+#             region_number,
+#             match.start(),
+#             match.end() - 1)
+#     print 'Length of Gap region {} = {}'.format(
+#             region_number,
+#             match.end() - match.start())
+#     print
+
 
 # Test
 gene = geneParse(g)
@@ -35,6 +52,7 @@ var = geneParse(v)
 # Quick Comparison
 tuple(gene.values()) == tuple(var.values())
 
-# compare the two
-
-# capture difference
+# Plan
+# 1. Get FASTA
+# 2. Align sequences --> Create VCF
+# 3. Analyze Differences
