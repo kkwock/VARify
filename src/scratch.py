@@ -49,6 +49,11 @@ def geneParse(x):
 # Test
 gene = geneParse(g)
 var = geneParse(v)
+
+# f = open(g, 'r')
+# lines = f.readlines()
+#
+# f = AlignIO.read(g, "fasta")
 # Quick Comparison
 tuple(gene.values()) == tuple(var.values())
 
