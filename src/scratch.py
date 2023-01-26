@@ -56,3 +56,5 @@ tuple(gene.values()) == tuple(var.values())
 # 1. Get FASTA
 # 2. Align sequences --> Create VCF
 # 3. Analyze Differences
+
+from Bio import AlignIO
