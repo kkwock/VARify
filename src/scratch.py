@@ -53,7 +53,7 @@ var = geneParse(v)
 # f = open(g, 'r')
 # lines = f.readlines()
 #
-# f = AlignIO.read(g, "fasta")
+f = AlignIO.read(g, "fasta")
 # Quick Comparison
 tuple(gene.values()) == tuple(var.values())
 
@@ -63,3 +63,13 @@ tuple(gene.values()) == tuple(var.values())
 # 3. Analyze Differences
 
 from Bio import AlignIO
+
+import Bio
+import Bio.Align.Applications
+from Bio.Align.Applications import ClustalwCommandline
+cline = ClustalwCommandline("clustalw2", infile='../VARify/data/test/test_gene.fa', outfile='../VARify/data/test/test_gene.aln')
+stdout, stderr = cline()
+
+from Bio import AlignIO
+align = AlignIO.read('../VARify/data/test/test_gene.aln', 'clustal')
+print(align)
