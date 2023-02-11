@@ -1,0 +1,2 @@
+chr_id	snp_pos	ref_allele	alt_allele	gene_id	mrna_id	prot_id	strand	effect	snp_cds_pos	codon1_genome_pos	codon2_genome_pos	codon3_genome_pos	snp_aa_pos	ref_codon	alt_codon	ref_aa	alt_aa
+chr1	126414	G	A	Pdac_HC_chr1G0000300	Pdac_HC_chr1T0000300.1	Pdac_HC_chr1T0000300.1	+	synonymous	267	126412	126413	126414	89	GAG	GAA	E	E
