@@ -60,11 +60,12 @@ def uniqueSNP(x):
 
         snp_dict = {}
 
-    df = pd.merge(sub_cf, df, on='snp_pos')
+    df = pd.merge(so, df, on='snp_pos')
     return df
 
 
-def varify(x):
+def varify(mp, so):
+    x = mergeTab(mp, so)
     df = x.apply(axis=1, func=uniqueSNP)
     df = pd.concat(list(df))
     reorg = ['chr_id', 'snp_pos', 'ref_allele', 'alt_allele',

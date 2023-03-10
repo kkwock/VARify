@@ -2,12 +2,14 @@
 import argparse
 import pandas as pd
 import sys
+import traceback
+from pathlib import Path
 import re
 
 script_dir = Path(__file__).parent
 sys.path.append(script_dir)
 
-import utilities as utils
+import utility as utils
 
 # Input Data
 '''
@@ -31,7 +33,6 @@ if __name__ == "__main__":
     # if len(header) == 1:
     #     raise Exception("Invalid input file format: Input CSV file is not comma-separated.")
 
-
     # MAIN
     # mpileup input
     mp = pd.read_table(ARGS.in_mp, header=None)
@@ -40,7 +41,6 @@ if __name__ == "__main__":
     #snpeff-like table input
     so = pd.read_table(ARGS.in_so)
 
-    mdf = utils.mergeTab(mp, so)
-    utils.varify(mdf)
+    utils.varify(mp, so)
 
     # create report csv
