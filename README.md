@@ -3,7 +3,7 @@
 ## Contents
 * **Notebook:** `notebook/varify_notebook.ipynb`
 * **Test Data:** `data/test/`
-* **Main Script:** `script/main.py` 
+* **Report Script:** `script/main.py` 
 * **Utility File:** `script/utility.py`
 
 ## How to use
