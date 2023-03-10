@@ -1,3 +1,4 @@
 chr_id	snp_pos	ref_allele	alt_allele	gene_id	mrna_id	prot_id	strand	effect	snp_cds_pos	codon1_genome_pos	codon2_genome_pos	codon3_genome_pos	snp_aa_pos	ref_codon	alt_codon	ref_aa	alt_aa
+chr1	521	G	C	seq1	seq1.1	seq1.1	+	synonymous	265	519	520	521	89	AAG	AAC	K	N
 chr1	523	A	T	seq1	seq1.1	seq1.1	+	synonymous	267	521	522	523	89	GTA	GTT	E	E
 chr1	524	C	G	seq1	seq1.1	seq1.1	+	synonymous	268	522	523	524	89	TAC	TAG	Y	X

@@ -1,4 +1,4 @@
-seq1	521	G	26	.,...........,..,..,.,.,,^].	DJJJJJJJJJJJJJJJJJJJJJJJA7	]]]]]]]]]]]]]]]]]]]]]]]]]]
+seq1	521	G	26	.,......C.T.A,..,..,.,.,,^].	DJJJJJJJJJJJJJJJJJJJJJJJA7	]]]]]]]]]]]]]]]]]]]]]]]]]]
 seq1	522	T	25	,...........,..,..,.,.,,.	JJJJJJJJJJJJJJJJJJJJJJJA7	]]]]]]]]]]]]]]]]]]]]]]]]]
 seq1	523	A	25	tTTTTTTTTCTTtTTtTCtTtTttC	JJJJJJJJJJJJJJJJJJJJJJJA7	]]]]]]]]]]]]]]]]]]]]]]]]]
 seq1	524	C	27	,...G.......,.G,..,.,.,,A..	JJJJJJJJJJJJJJJJJJJJJJJJG88	]]]]]]]]]]]]]]]]]]]]]]]]]]]
