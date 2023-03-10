@@ -9,6 +9,7 @@ def mergeTab(mp, so):
     mdf = pd.merge(so, sub_mp, on='snp_pos')
     return mdf
 
+
 def varOnly(a):
     '''
     purpose: remove non-nt values in pileup
@@ -64,8 +65,7 @@ def uniqueSNP(x):
     return df
 
 
-def varify(mp, so):
-    x = mergeTab(mp, so)
+def varify(x):
     df = x.apply(axis=1, func=uniqueSNP)
     df = pd.concat(list(df))
     reorg = ['chr_id', 'snp_pos', 'ref_allele', 'alt_allele',
