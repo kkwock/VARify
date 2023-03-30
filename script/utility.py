@@ -2,6 +2,46 @@
 import warnings
 import pandas as pd
 
+# 
+
+def split(word):
+    return list(word)
+
+def majorSNP(merged_var):
+    n=0
+    arr = split(merged_var['pileup'][n])
+    
+    snps = pd.Series(arr).drop_duplicates().tolist()
+    
+    count = dict.fromkeys(snps, 0)
+
+    for snp_key in snps:
+        for arr_key in arr: 
+            if snp_key == arr_key: 
+                count[snp_key] = count.get(snp_key, 0) + 1
+                
+    top_snp = sorted(count)[0]
+    return top_snp
+
+# strand
+def strand(x):
+    pos = ['A','C','T','G', 'N']
+    rev = ['a','c','t','g', 'n']
+    if x in pos:
+        return '+'
+    if x in rev:
+        return '-'
+    
+# grab all snps
+#def uniqueSNP():
+    # get the list of SNPs
+    
+    # split into unique
+    
+
+def combine(x):
+    return print(*x, sep='')
+
 
 # For every row in here, we're going to apply this uniqueSNP function
 def mergeTab(mp, so):
