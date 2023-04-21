@@ -14464,10 +14464,6 @@ a.anchor-link {
   display: none;
 }
 
-.highlight  {
-  margin: 0.4em;
-}
-
 /* Input area styling */
 .jp-InputArea {
   overflow: hidden;
@@ -14477,9 +14473,26 @@ a.anchor-link {
   overflow: hidden;
 }
 
-.CodeMirror pre {
+.CodeMirror.cm-s-jupyter .highlight pre {
+/* weird, but --jp-code-padding defined to be 5px but 4px horizontal padding is hardcoded for pre.CodeMirror-line */
+  padding: var(--jp-code-padding) 4px;
   margin: 0;
-  padding: 0;
+
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+
+}
+
+.jp-OutputArea-output pre {
+  line-height: inherit;
+  font-family: inherit;
+}
+
+.jp-RenderedText pre {
+  color: var(--jp-content-font-color1);
+  font-size: var(--jp-code-font-size);
 }
 
 /* Using table instead of flexbox so that we can use break-inside property */
@@ -14523,6 +14536,10 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 /* Hiding the collapser by default */
 .jp-Collapser {
   display: none;
+}
+
+@page {
+    margin: 0.5in; /* Margin for each printed piece of paper */
 }
 
 @media print {
@@ -14573,7 +14590,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=1106b087" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14584,19 +14601,19 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=c87d4722" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Workflow">Workflow<a class="anchor-link" href="#Workflow">&#182;</a></h2><p><img src="wf.png" width="600"></p>
+<h2 id="Workflow">Workflow<a class="anchor-link" href="#Workflow">&#182;</a></h2><img src="wf.png" width="600">
 
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=4b3680f4" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14606,12 +14623,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=70705ac3" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[164]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
@@ -14620,11 +14637,11 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="c1"># mpileup </span>
-<span class="n">mp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">'../data/test/mpiletest-out.txt'</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="n">mp</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s2">"snp_pos"</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="s2">"pileup"</span><span class="p">})</span>
+<span class="n">mp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">&#39;../data/test/mpiletest-out.txt&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">mp</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s2">&quot;snp_pos&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="s2">&quot;pileup&quot;</span><span class="p">})</span>
 
 <span class="c1"># custom out file</span>
-<span class="n">cf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">'../data/test/snp_out.txt'</span><span class="p">)</span>
+<span class="n">cf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">&#39;../data/test/snp_out.txt&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14638,9 +14655,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -14656,27 +14671,27 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div id="cell-id=ccd793ba" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># column names</span>
-<span class="c1"># cols = ['chr_id', 'snp_pos', 'ref_allele', </span>
-<span class="c1">#         'alt_allele', 'gene_id', 'mrna_id',</span>
-<span class="c1">#         'prot_id', 'strand', 'effect', </span>
-<span class="c1">#         'snp_cds_pos', 'codon1_genome_pos',</span>
-<span class="c1">#         'codon2_genome_pos', 'codon3_genome_pos', </span>
-<span class="c1">#         'snp_aa_pos', 'ref_codon','alt_codon', </span>
-<span class="c1">#         'ref_aa', 'alt_aa']</span>
+<span class="c1"># cols = [&#39;chr_id&#39;, &#39;snp_pos&#39;, &#39;ref_allele&#39;, </span>
+<span class="c1">#         &#39;alt_allele&#39;, &#39;gene_id&#39;, &#39;mrna_id&#39;,</span>
+<span class="c1">#         &#39;prot_id&#39;, &#39;strand&#39;, &#39;effect&#39;, </span>
+<span class="c1">#         &#39;snp_cds_pos&#39;, &#39;codon1_genome_pos&#39;,</span>
+<span class="c1">#         &#39;codon2_genome_pos&#39;, &#39;codon3_genome_pos&#39;, </span>
+<span class="c1">#         &#39;snp_aa_pos&#39;, &#39;ref_codon&#39;,&#39;alt_codon&#39;, </span>
+<span class="c1">#         &#39;ref_aa&#39;, &#39;alt_aa&#39;]</span>
 
-<span class="n">sub_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'chr_id'</span><span class="p">,</span> <span class="s1">'snp_pos'</span><span class="p">,</span> <span class="s1">'ref_allele'</span><span class="p">,</span> 
-            <span class="s1">'alt_allele'</span><span class="p">,</span> <span class="s1">'codon1_genome_pos'</span><span class="p">,</span>
-            <span class="s1">'codon2_genome_pos'</span><span class="p">,</span> <span class="s1">'codon3_genome_pos'</span><span class="p">,</span> 
-            <span class="s1">'ref_codon'</span><span class="p">]</span>
+<span class="n">sub_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;chr_id&#39;</span><span class="p">,</span> <span class="s1">&#39;snp_pos&#39;</span><span class="p">,</span> <span class="s1">&#39;ref_allele&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;alt_allele&#39;</span><span class="p">,</span> <span class="s1">&#39;codon1_genome_pos&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;codon2_genome_pos&#39;</span><span class="p">,</span> <span class="s1">&#39;codon3_genome_pos&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;ref_codon&#39;</span><span class="p">]</span>
 
 <span class="c1"># subset of custom file, cf</span>
 <span class="n">sub_cf</span> <span class="o">=</span> <span class="n">cf</span><span class="p">[</span><span class="n">sub_cols</span><span class="p">]</span>
@@ -14688,8 +14703,202 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[27]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chr_id</th>
+      <th>snp_pos</th>
+      <th>ref_allele</th>
+      <th>alt_allele</th>
+      <th>codon1_genome_pos</th>
+      <th>codon2_genome_pos</th>
+      <th>codon3_genome_pos</th>
+      <th>ref_codon</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>chr1</td>
+      <td>521</td>
+      <td>G</td>
+      <td>C</td>
+      <td>519</td>
+      <td>520</td>
+      <td>521</td>
+      <td>AAG</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>chr1</td>
+      <td>523</td>
+      <td>A</td>
+      <td>T</td>
+      <td>521</td>
+      <td>522</td>
+      <td>523</td>
+      <td>GTA</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>chr1</td>
+      <td>524</td>
+      <td>C</td>
+      <td>G</td>
+      <td>522</td>
+      <td>523</td>
+      <td>524</td>
+      <td>TAC</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div id="cell-id=509754eb" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mp</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[28]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>snp_pos</th>
+      <th>2</th>
+      <th>3</th>
+      <th>pileup</th>
+      <th>5</th>
+      <th>6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>seq1</td>
+      <td>521</td>
+      <td>G</td>
+      <td>26</td>
+      <td>.,......A.a.A,..,..,.,.,,^].</td>
+      <td>DJJJJJJJJJJJJJJJJJJJJJJJA7</td>
+      <td>]]]]]]]]]]]]]]]]]]]]]]]]]]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>seq1</td>
+      <td>522</td>
+      <td>T</td>
+      <td>25</td>
+      <td>,...........,..,..,.,.,,.</td>
+      <td>JJJJJJJJJJJJJJJJJJJJJJJA7</td>
+      <td>]]]]]]]]]]]]]]]]]]]]]]]]]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>seq1</td>
+      <td>523</td>
+      <td>A</td>
+      <td>25</td>
+      <td>tTTTTTTTTTTTtTTtTTtTtTttT</td>
+      <td>JJJJJJJJJJJJJJJJJJJJJJJA7</td>
+      <td>]]]]]]]]]]]]]]]]]]]]]]]]]</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>seq1</td>
+      <td>524</td>
+      <td>C</td>
+      <td>27</td>
+      <td>,...G.......,.G,..,.,.,,G..</td>
+      <td>JJJJJJJJJJJJJJJJJJJJJJJJG88</td>
+      <td>]]]]]]]]]]]]]]]]]]]]]]]]]]]</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div id="cell-id=26ef5f9d" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14699,16 +14908,16 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=98f81b15" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sub_mp</span> <span class="o">=</span> <span class="n">mp</span><span class="p">[[</span><span class="s1">'snp_pos'</span><span class="p">,</span><span class="s1">'pileup'</span><span class="p">]]</span>
-<span class="n">merged_var</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">sub_mp</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'snp_pos'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sub_mp</span> <span class="o">=</span> <span class="n">mp</span><span class="p">[[</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">,</span><span class="s1">&#39;pileup&#39;</span><span class="p">]]</span>
+<span class="n">merged_var</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">sub_mp</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">)</span>
 <span class="n">merged_var</span>
 </pre></div>
 
@@ -14723,11 +14932,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[29]:</div>
 
 
 
@@ -14792,7 +14999,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <td>AAC</td>
       <td>K</td>
       <td>N</td>
-      <td>.,......C.T.A,..,..,.,.,,^].</td>
+      <td>.,......A.a.A,..,..,.,.,,^].</td>
     </tr>
     <tr>
       <th>1</th>
@@ -14814,7 +15021,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <td>GTT</td>
       <td>E</td>
       <td>E</td>
-      <td>tTTTTTTTTCTTtTTtTCtTtTttC</td>
+      <td>tTTTTTTTTTTTtTTtTTtTtTttT</td>
     </tr>
     <tr>
       <th>2</th>
@@ -14836,7 +15043,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <td>TAG</td>
       <td>Y</td>
       <td>X</td>
-      <td>,...G.......,.G,..,.,.,,A..</td>
+      <td>,...G.......,.G,..,.,.,,G..</td>
     </tr>
   </tbody>
 </table>
@@ -14850,7 +15057,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div id="cell-id=13186127" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14861,12 +15068,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div id="cell-id=48e8d272" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Utility File</span>
@@ -14875,26 +15082,44 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="c1"># For every row in here, we're going to apply this uniqueSNP function</span>
+<span class="c1"># For every row in here, we&#39;re going to apply this uniqueSNP function</span>
 
 <span class="k">def</span> <span class="nf">mergeTab</span><span class="p">(</span><span class="n">mp</span><span class="p">,</span> <span class="n">so</span><span class="p">):</span>
-    <span class="n">sub_mp</span> <span class="o">=</span> <span class="n">mp</span><span class="p">[[</span><span class="s1">'snp_pos'</span><span class="p">,</span> <span class="s1">'pileup'</span><span class="p">]]</span>
-    <span class="n">mdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">so</span><span class="p">,</span> <span class="n">sub_mp</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'snp_pos'</span><span class="p">)</span>
+    <span class="n">sub_mp</span> <span class="o">=</span> <span class="n">mp</span><span class="p">[[</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">,</span> <span class="s1">&#39;pileup&#39;</span><span class="p">]]</span>
+    <span class="n">mdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">so</span><span class="p">,</span> <span class="n">sub_mp</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">mdf</span>
 
 
 <span class="k">def</span> <span class="nf">varOnly</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-    <span class="sd">'''</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    purpose: remove non-nt values in pileup</span>
 <span class="sd">    input: string of mpileup </span>
 <span class="sd">    output: nt string</span>
-<span class="sd">    '''</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'A'</span><span class="p">,</span><span class="s1">'C'</span><span class="p">,</span><span class="s1">'T'</span><span class="p">,</span><span class="s1">'G'</span><span class="p">]]</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">]]</span>
     
     <span class="k">return</span> <span class="n">x</span>
 
+<span class="k">def</span> <span class="nf">isMono</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">temp</span><span class="p">):</span>
+    <span class="c1"># Check if two snps are monomorphic</span>
+    <span class="n">c</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">snp</span> <span class="ow">in</span> <span class="n">temp</span> <span class="k">if</span> <span class="n">snp</span> <span class="o">==</span> <span class="n">ref</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span> 
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;More than 2 monomorphic alleles at position.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    
+<span class="k">def</span> <span class="nf">multiError</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span> 
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;There are more than 2 SNPS at position&quot;</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+    
 <span class="k">def</span> <span class="nf">uniqueSNP</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="n">l</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">'pileup'</span><span class="p">])</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Takes mPileup</span>
+<span class="sd">    Confirm Alt</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;pileup&#39;</span><span class="p">])</span>
     <span class="c1"># make upper</span>
     <span class="n">l</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="c1"># just to make simple</span>
     <span class="n">l</span> <span class="o">=</span> <span class="n">varOnly</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
@@ -14905,45 +15130,73 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
     
     <span class="c1"># create a dictionary</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-    <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="s1">'ref_codon'</span><span class="p">]]</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;ref_codon&#39;</span><span class="p">]]</span>
     <span class="n">snp_dict</span> <span class="o">=</span> <span class="p">{}</span>
     
-    <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="c1">#     flag = False</span>
     
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_unique</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span> 
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">"There are more than 2 SNPS at position"</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">'snp_pos'</span><span class="p">])</span>
-        <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1">#     multiError(a_unique, x[&#39;snp_pos&#39;])</span>
 
+    <span class="n">test</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Creates a combination of SNPs</span>
+<span class="sd">    Replaces Alt at each position</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">for</span> <span class="n">snp</span> <span class="ow">in</span> <span class="n">a_unique</span><span class="p">:</span>
-        <span class="n">snp_dict</span><span class="p">[</span><span class="s1">'snp_pos'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">'snp_pos'</span><span class="p">])</span>
-        <span class="n">snp_dict</span><span class="p">[</span><span class="s1">'varify_alt'</span><span class="p">]</span> <span class="o">=</span> <span class="n">snp</span>
+        <span class="n">snp_dict</span><span class="p">[</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">])</span>
+        <span class="n">snp_dict</span><span class="p">[</span><span class="s1">&#39;varify_alt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">snp</span>
 
-        <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
-            <span class="n">snp_dict</span><span class="p">[</span><span class="s1">'flag'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'*'</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">snp_dict</span><span class="p">[</span><span class="s1">'flag'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="c1">#         if flag:</span>
+<span class="c1">#             snp_dict[&#39;flag&#39;] = &#39;*&#39;</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             snp_dict[&#39;flag&#39;] = &#39;&#39;</span>
         
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">)):</span>
-            <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">snp</span>     
-            <span class="n">snp_dict</span><span class="p">[</span><span class="sa">f</span><span class="s2">"varify_codon</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
-            <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="s1">'ref_codon'</span><span class="p">]]</span>
-
+<span class="c1">#         for i in range(len(temp)):</span>
+<span class="c1">#             temp[i] = snp</span>
+<span class="c1">#             test.append(&#39;&#39;.join(temp))</span>
+<span class="c1">#             snp_dict[f&quot;varify_codon{i+1}&quot;] = &#39;&#39;.join(temp)</span>
+<span class="c1">#             temp = [i for i in ref]</span>
+            
+<span class="c1">#         flag = isMono(ref, test)  </span>
+        
+<span class="c1">#         if flag: </span>
+<span class="c1">#             snp_dict[&#39;flag&#39;] = &#39;*&#39;</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             snp_dict[&#39;flag&#39;] = &#39;&#39;</span>
+            
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">snp_dict</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        
-        <span class="n">snp_dict</span> <span class="o">=</span> <span class="p">{}</span>
 
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">so</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'snp_pos'</span><span class="p">)</span>
+
+        <span class="n">snp_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">df</span>
 
+<span class="k">def</span> <span class="nf">altValidate</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># Varify alt == Alt? T or F</span>
+    <span class="c1"># Add flag to capture</span>
+    
+    <span class="n">x</span><span class="p">[</span><span class="s1">&#39;VARified&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Yes&#39;</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;alt_allele&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;varify_alt&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;No&#39;</span>
+    
+    <span class="k">return</span> <span class="n">x</span>
 
 <span class="k">def</span> <span class="nf">varify</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">uniqueSNP</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
-    <span class="n">reorg</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'chr_id'</span><span class="p">,</span> <span class="s1">'snp_pos'</span><span class="p">,</span> <span class="s1">'ref_allele'</span><span class="p">,</span> <span class="s1">'alt_allele'</span><span class="p">,</span> 
-             <span class="s1">'varify_alt'</span><span class="p">,</span> <span class="s1">'codon1_genome_pos'</span><span class="p">,</span><span class="s1">'codon2_genome_pos'</span><span class="p">,</span>
-             <span class="s1">'codon3_genome_pos'</span><span class="p">,</span> <span class="s1">'ref_codon'</span><span class="p">,</span> <span class="s1">'varify_codon1'</span><span class="p">,</span> 
-             <span class="s1">'varify_codon2'</span><span class="p">,</span> <span class="s1">'varify_codon3'</span><span class="p">,</span><span class="s1">'flag'</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">altValidate</span><span class="p">)</span>
 
+    <span class="n">df</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">altCombo</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">)</span>
+    
+    <span class="n">reorg</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;chr_id&#39;</span><span class="p">,</span> <span class="s1">&#39;snp_pos&#39;</span><span class="p">,</span> <span class="s1">&#39;ref_allele&#39;</span><span class="p">,</span> <span class="s1">&#39;alt_allele&#39;</span><span class="p">,</span> 
+             <span class="s1">&#39;varify_alt&#39;</span><span class="p">,</span> <span class="s1">&#39;VARified&#39;</span><span class="p">,</span> 
+             <span class="s1">&#39;codon1_genome_pos&#39;</span><span class="p">,</span><span class="s1">&#39;codon2_genome_pos&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;codon3_genome_pos&#39;</span><span class="p">,</span> <span class="s1">&#39;ref_codon&#39;</span><span class="p">,</span> 
+             <span class="s1">&#39;varify_codon1&#39;</span><span class="p">,</span> <span class="s1">&#39;varify_codon2&#39;</span><span class="p">,</span> <span class="s1">&#39;varify_codon3&#39;</span><span class="p">,</span><span class="c1">#&#39;flag&#39;</span>
+            <span class="p">]</span>
+    
     <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">reorg</span><span class="p">]</span>
 </pre></div>
 
@@ -14952,15 +15205,15 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=7eac0ac4" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[34]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mdf</span> <span class="o">=</span> <span class="n">mergeTab</span><span class="p">(</span><span class="n">mp</span><span class="p">,</span> <span class="n">so</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mdf</span> <span class="o">=</span> <span class="n">mergeTab</span><span class="p">(</span><span class="n">mp</span><span class="p">,</span> <span class="n">cf</span><span class="p">)</span>
 <span class="n">varify</span><span class="p">(</span><span class="n">merged_var</span><span class="p">)</span>
 </pre></div>
 
@@ -14975,36 +15228,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>521
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>&lt;ipython-input-31-2363766a900e&gt;:43: UserWarning: There are more than 2 SNPS at position
-  warnings.warn(&#34;There are more than 2 SNPS at position&#34;); print(x[&#39;snp_pos&#39;])
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[33]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[34]:</div>
 
 
 
@@ -15032,6 +15258,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <th>ref_allele</th>
       <th>alt_allele</th>
       <th>varify_alt</th>
+      <th>VARified</th>
       <th>codon1_genome_pos</th>
       <th>codon2_genome_pos</th>
       <th>codon3_genome_pos</th>
@@ -15039,7 +15266,6 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <th>varify_codon1</th>
       <th>varify_codon2</th>
       <th>varify_codon3</th>
-      <th>flag</th>
     </tr>
   </thead>
   <tbody>
@@ -15050,110 +15276,46 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <td>G</td>
       <td>C</td>
       <td>A</td>
+      <td>No</td>
       <td>519</td>
       <td>520</td>
       <td>521</td>
       <td>AAG</td>
-      <td>AAG</td>
-      <td>AAG</td>
-      <td>AAA</td>
-      <td>*</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>AAC</td>
     </tr>
     <tr>
       <th>1</th>
       <td>chr1</td>
-      <td>521</td>
-      <td>G</td>
-      <td>C</td>
+      <td>523</td>
+      <td>A</td>
       <td>T</td>
-      <td>519</td>
-      <td>520</td>
+      <td>T</td>
+      <td>Yes</td>
       <td>521</td>
-      <td>AAG</td>
-      <td>TAG</td>
-      <td>ATG</td>
-      <td>AAT</td>
-      <td>*</td>
+      <td>522</td>
+      <td>523</td>
+      <td>GTA</td>
+      <td>C.T</td>
+      <td>NaN</td>
+      <td>GTT</td>
     </tr>
     <tr>
       <th>2</th>
       <td>chr1</td>
-      <td>521</td>
-      <td>G</td>
-      <td>C</td>
-      <td>C</td>
-      <td>519</td>
-      <td>520</td>
-      <td>521</td>
-      <td>AAG</td>
-      <td>CAG</td>
-      <td>ACG</td>
-      <td>AAC</td>
-      <td>*</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>chr1</td>
-      <td>523</td>
-      <td>A</td>
-      <td>T</td>
-      <td>T</td>
-      <td>521</td>
-      <td>522</td>
-      <td>523</td>
-      <td>GTA</td>
-      <td>TTA</td>
-      <td>GTA</td>
-      <td>GTT</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>chr1</td>
-      <td>523</td>
-      <td>A</td>
-      <td>T</td>
-      <td>C</td>
-      <td>521</td>
-      <td>522</td>
-      <td>523</td>
-      <td>GTA</td>
-      <td>CTA</td>
-      <td>GCA</td>
-      <td>GTC</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>chr1</td>
       <td>524</td>
       <td>C</td>
       <td>G</td>
-      <td>A</td>
+      <td>G</td>
+      <td>Yes</td>
       <td>522</td>
       <td>523</td>
       <td>524</td>
       <td>TAC</td>
-      <td>AAC</td>
-      <td>TAC</td>
-      <td>TAA</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>chr1</td>
-      <td>524</td>
-      <td>C</td>
-      <td>G</td>
-      <td>G</td>
-      <td>522</td>
-      <td>523</td>
-      <td>524</td>
-      <td>TAC</td>
-      <td>GAC</td>
-      <td>TGC</td>
+      <td>NaN</td>
+      <td>TTG</td>
       <td>TAG</td>
-      <td></td>
     </tr>
   </tbody>
 </table>
@@ -15166,29 +15328,16 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 </div>
 
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Running-script">Running script<a class="anchor-link" href="#Running-script">&#182;</a></h2>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div id="cell-id=c37f09f5" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[35]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">reload_ext</span> autoreload
-<span class="o">%</span><span class="k">autoreload</span> 2
-
-<span class="o">%</span><span class="k">run</span> '../script/main.py' --in_mp '../data/test/mpiletest-out.txt' --in_so '../data/test/snp_out.txt'
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># pile up </span>
+<span class="n">mp</span>
 </pre></div>
 
      </div>
@@ -15202,55 +15351,226 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[35]:</div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>521
-  chr_id  snp_pos ref_allele alt_allele varify_alt  codon1_genome_pos  \
-0   chr1      521          G          C          A                519   
-1   chr1      521          G          C          T                519   
-2   chr1      521          G          C          C                519   
-0   chr1      523          A          T          T                521   
-1   chr1      523          A          T          C                521   
-0   chr1      524          C          G          A                522   
-1   chr1      524          C          G          G                522   
 
-   codon2_genome_pos  codon3_genome_pos ref_codon varify_codon1 varify_codon2  \
-0                520                521       AAG           AAG           AAG   
-1                520                521       AAG           TAG           ATG   
-2                520                521       AAG           CAG           ACG   
-0                522                523       GTA           TTA           GTA   
-1                522                523       GTA           CTA           GCA   
-0                523                524       TAC           AAC           TAC   
-1                523                524       TAC           GAC           TGC   
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-  varify_codon3 flag  
-0           AAA    *  
-1           AAT    *  
-2           AAC    *  
-0           GTT       
-1           GTC       
-0           TAA       
-1           TAG       
-</pre>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>snp_pos</th>
+      <th>2</th>
+      <th>3</th>
+      <th>pileup</th>
+      <th>5</th>
+      <th>6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>seq1</td>
+      <td>521</td>
+      <td>G</td>
+      <td>26</td>
+      <td>.,......A.a.A,..,..,.,.,,^].</td>
+      <td>DJJJJJJJJJJJJJJJJJJJJJJJA7</td>
+      <td>]]]]]]]]]]]]]]]]]]]]]]]]]]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>seq1</td>
+      <td>522</td>
+      <td>T</td>
+      <td>25</td>
+      <td>,...........,..,..,.,.,,.</td>
+      <td>JJJJJJJJJJJJJJJJJJJJJJJA7</td>
+      <td>]]]]]]]]]]]]]]]]]]]]]]]]]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>seq1</td>
+      <td>523</td>
+      <td>A</td>
+      <td>25</td>
+      <td>tTTTTTTTTTTTtTTtTTtTtTttT</td>
+      <td>JJJJJJJJJJJJJJJJJJJJJJJA7</td>
+      <td>]]]]]]]]]]]]]]]]]]]]]]]]]</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>seq1</td>
+      <td>524</td>
+      <td>C</td>
+      <td>27</td>
+      <td>,...G.......,.G,..,.,.,,G..</td>
+      <td>JJJJJJJJJJJJJJJJJJJJJJJJG88</td>
+      <td>]]]]]]]]]]]]]]]]]]]]]]]]]]]</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 </div>
 
-<div class="jp-OutputArea-child">
+</div>
 
+</div>
+
+</div>
+
+</div><div id="cell-id=38ae94f3" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[36]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># snp-eff like table</span>
+<span class="n">cf</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[36]:</div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>/Users/kkwock/Documents/GitHub/VARify/script/main.py:53: UserWarning: There are more than 2 SNPS at position
-  
-</pre>
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chr_id</th>
+      <th>snp_pos</th>
+      <th>ref_allele</th>
+      <th>alt_allele</th>
+      <th>gene_id</th>
+      <th>mrna_id</th>
+      <th>prot_id</th>
+      <th>strand</th>
+      <th>effect</th>
+      <th>snp_cds_pos</th>
+      <th>codon1_genome_pos</th>
+      <th>codon2_genome_pos</th>
+      <th>codon3_genome_pos</th>
+      <th>snp_aa_pos</th>
+      <th>ref_codon</th>
+      <th>alt_codon</th>
+      <th>ref_aa</th>
+      <th>alt_aa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>chr1</td>
+      <td>521</td>
+      <td>G</td>
+      <td>C</td>
+      <td>seq1</td>
+      <td>seq1.1</td>
+      <td>seq1.1</td>
+      <td>+</td>
+      <td>synonymous</td>
+      <td>265</td>
+      <td>519</td>
+      <td>520</td>
+      <td>521</td>
+      <td>89</td>
+      <td>AAG</td>
+      <td>AAC</td>
+      <td>K</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>chr1</td>
+      <td>523</td>
+      <td>A</td>
+      <td>T</td>
+      <td>seq1</td>
+      <td>seq1.1</td>
+      <td>seq1.1</td>
+      <td>+</td>
+      <td>synonymous</td>
+      <td>267</td>
+      <td>521</td>
+      <td>522</td>
+      <td>523</td>
+      <td>89</td>
+      <td>GTA</td>
+      <td>GTT</td>
+      <td>E</td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>chr1</td>
+      <td>524</td>
+      <td>C</td>
+      <td>G</td>
+      <td>seq1</td>
+      <td>seq1.1</td>
+      <td>seq1.1</td>
+      <td>+</td>
+      <td>synonymous</td>
+      <td>268</td>
+      <td>522</td>
+      <td>523</td>
+      <td>524</td>
+      <td>89</td>
+      <td>TAC</td>
+      <td>TAG</td>
+      <td>Y</td>
+      <td>X</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 </div>
 
@@ -15259,42 +15579,572 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+
+</div>
+<div id="cell-id=32ede3ea" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="To-Do">To Do<a class="anchor-link" href="#To-Do">&#182;</a></h3><ul>
-<li>[x] output comparison</li>
-<li>[ ] Type Effect</li>
-<li>[x] Make into Function</li>
-<li>[ ] Build larger test data</li>
-<li>[ ] Nextflow with Assembly/Sam to mpileup</li>
-</ul>
-<h3 id="Notes">Notes<a class="anchor-link" href="#Notes">&#182;</a></h3><p><strong>Test Data:</strong></p>
+<h1 id="VARify-for-same-ALT-as-prediction">VARify for same ALT as prediction<a class="anchor-link" href="#VARify-for-same-ALT-as-prediction">&#182;</a></h1><table>
+<thead>
+<tr>
+  <th>Pos</th>
+  <th>Ref</th>
+  <th>Alt</th>
+  <th>Varify_Alt</th>
+  <th>Varify</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>202</td>
+  <td>A</td>
+  <td>T</td>
+  <td>T</td>
+  <td>Yes</td>
+</tr>
+<tr>
+  <td>204</td>
+  <td>C</td>
+  <td>G</td>
+  <td>.</td>
+  <td>No</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=efd4acb4" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[37]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">varify_out</span> <span class="o">=</span> <span class="n">varify</span><span class="p">(</span><span class="n">merged_var</span><span class="p">)</span>
+
+<span class="n">varify_out</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[37]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chr_id</th>
+      <th>snp_pos</th>
+      <th>ref_allele</th>
+      <th>alt_allele</th>
+      <th>varify_alt</th>
+      <th>VARified</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>chr1</td>
+      <td>521</td>
+      <td>G</td>
+      <td>C</td>
+      <td>A</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>chr1</td>
+      <td>523</td>
+      <td>A</td>
+      <td>T</td>
+      <td>T</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>chr1</td>
+      <td>524</td>
+      <td>C</td>
+      <td>G</td>
+      <td>G</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div id="cell-id=5c7dcd34" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Capture-codon-combinations-from-different-positions">Capture codon combinations from different positions<a class="anchor-link" href="#Capture-codon-combinations-from-different-positions">&#182;</a></h1><p>Logic: 
+If position 1,2,3 and 1 and 3 have variances - we want to maintain these variances.</p>
+<p>We can place variances of 1 and 3 into dictionaries. 
+If at position 3 and position 1 has variances --&gt; combine and showcase AA</p>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=380eaf3a" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[38]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Codon Combos</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">altDict</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    Creates a combination of SNPs</span>
+<span class="sd">    if snps have existing alts</span>
+<span class="sd">    </span>
+<span class="sd">    Outputs into a dictionary</span>
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># At each line, takes reference codon</span>
+    <span class="c1"># sub_x = x.loc[x[&#39;VARified&#39;] == &#39;Yes&#39;]</span>
+    
+    <span class="c1"># create a dictionary of Alts</span>
+    <span class="n">alt_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;alt_allele&#39;</span><span class="p">]))</span>
+    
+    <span class="k">return</span> <span class="n">alt_dict</span>
+
+<span class="n">alt_dict</span> <span class="o">=</span> <span class="n">altDict</span><span class="p">(</span><span class="n">merged_var</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">altCombo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alt_dict</span><span class="o">=</span><span class="n">alt_dict</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Creates combos based on</span>
+<span class="sd">    Current position and alt dictionary</span>
+<span class="sd">    Can be used with apply</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">p3</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">])</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">p3</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">p2</span><span class="o">-</span><span class="mi">1</span>
+    
+    <span class="n">subDict</span> <span class="o">=</span> <span class="p">{</span><span class="n">p1</span> <span class="p">:</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">p2</span> <span class="p">:</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">p3</span> <span class="p">:</span> <span class="s1">&#39;.&#39;</span><span class="p">}</span>
+    
+    <span class="c1"># create a dictionary</span>
+    <span class="n">ref</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;ref_codon&#39;</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ref</span><span class="p">]</span>
+    <span class="n">snp_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="c1"># Add values from full dictionary if keys are in sub</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">alt_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">subDict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">subDict</span><span class="p">}</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        
+    <span class="c1"># Create combination of alts</span>
+    <span class="c1"># at pos3, replace 1; at pos2, replace 2</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">snp_dict</span><span class="p">[</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;.&#39;</span><span class="p">:</span>
+            <span class="c1"># replace res into temp</span>
+            <span class="n">temp</span><span class="p">[</span><span class="n">n</span><span class="p">:]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">n</span><span class="p">:]</span>
+            <span class="n">snp_dict</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;varify_codon</span><span class="si">{</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">snp_dict</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;varify_codon</span><span class="si">{</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+        <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ref</span><span class="p">]</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">snp_dict</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+    <span class="c1">#df = pd.concat(list(df))</span>
+    <span class="c1">#print(df)     </span>
+    <span class="c1">#df = pd.merge(x, df, on=&#39;snp_pos&#39;)</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">parent_key</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;_&#39;</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">collections</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">new_key</span> <span class="o">=</span> <span class="n">parent_key</span> <span class="o">+</span> <span class="n">sep</span> <span class="o">+</span> <span class="n">k</span> <span class="k">if</span> <span class="n">parent_key</span> <span class="k">else</span> <span class="n">k</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">MutableMapping</span><span class="p">):</span>
+            <span class="n">items</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">flatten</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">new_key</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">new_key</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div id="cell-id=6d6dfacc" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[39]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 3/31/23 - Do not remove Non-VARify Alts</span>
+<span class="c1"># sub_x = varify_out.loc[varify_out[&#39;VARified&#39;] == &#39;Yes&#39;] </span>
+<span class="c1"># alt_dict = dict(zip(sub_x[&#39;snp_pos&#39;], sub_x[&#39;alt_allele&#39;]))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">varify_out</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">altCombo</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">varify_out</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[39]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chr_id</th>
+      <th>snp_pos</th>
+      <th>ref_allele</th>
+      <th>alt_allele</th>
+      <th>varify_alt</th>
+      <th>VARified</th>
+      <th>codon1_genome_pos</th>
+      <th>codon2_genome_pos</th>
+      <th>codon3_genome_pos</th>
+      <th>ref_codon</th>
+      <th>varify_codon1_x</th>
+      <th>varify_codon2_x</th>
+      <th>varify_codon3_x</th>
+      <th>varify_codon1_y</th>
+      <th>varify_codon2_y</th>
+      <th>varify_codon3_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>chr1</td>
+      <td>521</td>
+      <td>G</td>
+      <td>C</td>
+      <td>A</td>
+      <td>No</td>
+      <td>519</td>
+      <td>520</td>
+      <td>521</td>
+      <td>AAG</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>AAC</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>AAC</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>chr1</td>
+      <td>523</td>
+      <td>A</td>
+      <td>T</td>
+      <td>T</td>
+      <td>Yes</td>
+      <td>521</td>
+      <td>522</td>
+      <td>523</td>
+      <td>GTA</td>
+      <td>C.T</td>
+      <td>NaN</td>
+      <td>GTT</td>
+      <td>C.T</td>
+      <td>NaN</td>
+      <td>GTT</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>chr1</td>
+      <td>524</td>
+      <td>C</td>
+      <td>G</td>
+      <td>G</td>
+      <td>Yes</td>
+      <td>522</td>
+      <td>523</td>
+      <td>524</td>
+      <td>TAC</td>
+      <td>NaN</td>
+      <td>TTG</td>
+      <td>TAG</td>
+      <td>NaN</td>
+      <td>TTG</td>
+      <td>TAG</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div id="cell-id=3ee16fbc" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[40]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">out</span> <span class="o">=</span> <span class="n">varify</span><span class="p">(</span><span class="n">merged_var</span><span class="p">)</span>
+<span class="n">out</span><span class="p">[[</span><span class="s1">&#39;chr_id&#39;</span><span class="p">,</span> <span class="s1">&#39;snp_pos&#39;</span><span class="p">,</span> <span class="s1">&#39;ref_allele&#39;</span><span class="p">,</span> <span class="s1">&#39;alt_allele&#39;</span><span class="p">,</span> <span class="s1">&#39;varify_alt&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;VARified&#39;</span><span class="p">,</span><span class="s1">&#39;ref_codon&#39;</span><span class="p">,</span> <span class="s1">&#39;varify_codon1&#39;</span><span class="p">,</span> <span class="s1">&#39;varify_codon2&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;varify_codon3&#39;</span><span class="p">]]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[40]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chr_id</th>
+      <th>snp_pos</th>
+      <th>ref_allele</th>
+      <th>alt_allele</th>
+      <th>varify_alt</th>
+      <th>VARified</th>
+      <th>ref_codon</th>
+      <th>varify_codon1</th>
+      <th>varify_codon2</th>
+      <th>varify_codon3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>chr1</td>
+      <td>521</td>
+      <td>G</td>
+      <td>C</td>
+      <td>A</td>
+      <td>No</td>
+      <td>AAG</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>AAC</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>chr1</td>
+      <td>523</td>
+      <td>A</td>
+      <td>T</td>
+      <td>T</td>
+      <td>Yes</td>
+      <td>GTA</td>
+      <td>C.T</td>
+      <td>NaN</td>
+      <td>GTT</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>chr1</td>
+      <td>524</td>
+      <td>C</td>
+      <td>G</td>
+      <td>G</td>
+      <td>Yes</td>
+      <td>TAC</td>
+      <td>NaN</td>
+      <td>TTG</td>
+      <td>TAG</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div id="cell-id=3f708429" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Running-Script">Running Script<a class="anchor-link" href="#Running-Script">&#182;</a></h1>
+</div>
+</div>
+</div>
+</div><div id="cell-id=37bbd614" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">reload_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+
+<span class="o">%</span><span class="k">run</span> &#39;../script/main.py&#39; --in_mp &#39;../data/test/mpiletest-out.txt&#39; --in_so &#39;../data/test/snp_out.txt&#39;
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div id="cell-id=302e41ef" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Case-1">Case 1<a class="anchor-link" href="#Case-1">&#182;</a></h1><p>Consider the following mutation that introduces a G-&gt;A mutation.</p>
+<p>VCF:
+Chr1	1100023      	.       	G     	A      	60    	PASS	.       	GT    	0/1</p>
 <ul>
-<li>Take processed mRNA transcript (FASTA) —&gt; VCF w/ 2-3 SNPS</li>
+<li>Genotype: G/A</li>
+<li>Reference base: G</li>
+<li>Alternate base: A</li>
+<li>Predicted reference codon: TGG (tryptophan)</li>
+<li>Predicted alternate codon: TGA (premature termination codon)</li>
 </ul>
-<p><strong>Process:</strong></p>
-<ul>
-<li>RNA FASTA -align to genome using gmap-&gt;SAM/BAM—&gt;BAM -variantcalling-&gt; VCF —&gt; Capture Variants</li>
-<li>DNA FASTA -align to genome using gmap-&gt;SAM/BAM—&gt;BAM -variantcalling-&gt; VCF —&gt; Capture Variants |—&gt; Compare RV and GV</li>
-</ul>
+<p>A tool like snpEff can be used to predict the effect of the mutation using a reference genome annotation (e.g., GFF). In this case the mutation occurs in a coding exon at third position of a codon that codes for tryptophan in the reference proteome and a premature termination codon in the case of the alternate allele. snpEff will determine the reference and alternate codon and return the two codons and their translation.</p>
+<p>The predicted effect is therefore a nonsense mutation.</p>
 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div id="cell-id=76adbb9d" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[315]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">top_snp</span> <span class="o">=</span> <span class="n">majorSNP</span><span class="p">(</span><span class="n">merged_var</span><span class="p">)</span>
-<span class="n">top_strand</span> <span class="o">=</span> <span class="n">strand</span><span class="p">(</span><span class="n">top_snp</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">readMP</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="n">mp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">mp</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s2">&quot;snp_pos&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s2">&quot;ref&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="s2">&quot;pileup&quot;</span><span class="p">})</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">mp</span><span class="p">)</span>
+    
+<span class="c1"># mpileup </span>
+<span class="n">mp1</span> <span class="o">=</span> <span class="n">readMP</span><span class="p">(</span><span class="s1">&#39;../data/test/case1_pileup.txt&#39;</span><span class="p">)</span>
+
+<span class="n">mp1</span>
 </pre></div>
 
      </div>
@@ -15302,20 +16152,89 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[315]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>snp_pos</th>
+      <th>ref</th>
+      <th>3</th>
+      <th>pileup</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Chr1</td>
+      <td>1100021</td>
+      <td>T</td>
+      <td>12</td>
+      <td>.............</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Chr1</td>
+      <td>1100022</td>
+      <td>G</td>
+      <td>13</td>
+      <td>.............</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Chr1</td>
+      <td>1100023</td>
+      <td>G</td>
+      <td>13</td>
+      <td>...A...A..A..</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div id="cell-id=b8b35843" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[314]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">snp_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'confirmed_snp'</span> <span class="p">:</span> <span class="n">top_snp</span><span class="p">,</span> <span class="s1">'confirmed_strand'</span> <span class="p">:</span> <span class="n">strand</span><span class="p">}</span>
-<span class="n">merged_var</span><span class="p">[</span><span class="s1">'confirmed_snp'</span><span class="p">]</span> <span class="o">=</span> <span class="n">top_snp</span>
-<span class="n">merged_var</span><span class="p">[</span><span class="s1">'confirmed_strand'</span><span class="p">]</span> <span class="o">=</span> <span class="n">top_strand</span>
-
-<span class="c1"># proposed final output</span>
-<span class="n">merged_var</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">'pileup'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
      </div>
@@ -15323,54 +16242,60 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div>
+<div id="cell-id=5d8cb91d" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Example">Example<a class="anchor-link" href="#Example">&#182;</a></h2><table>
+<thead>
+<tr>
+  <th>Pos</th>
+  <th>Ref</th>
+  <th>Pred_Alt</th>
+  <th>Varify_Alt</th>
+  <th>Varify</th>
+  <th>varify_codon1</th>
+  <th>varify_codon2</th>
+  <th>varify_codon3</th>
+  <th>aa</th>
+  <th>effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1100023</td>
+  <td>G</td>
+  <td>A</td>
+  <td>T</td>
+  <td>Yes</td>
+  <td>NaN</td>
+  <td>TGG</td>
+  <td>TGA</td>
+  <td></td>
+  <td></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div><div id="cell-id=39f98440" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[293]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># majority snp</span>
-<span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># The toy VCF</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">toy_vcf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">&#39;../data/toy/toy.vcf&#39;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">majorSNP</span><span class="p">(</span><span class="n">merged_var</span><span class="p">):</span>
-    <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
-    <span class="n">arr</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">merged_var</span><span class="p">[</span><span class="s1">'pileup'</span><span class="p">][</span><span class="n">n</span><span class="p">])</span>
-    
-    <span class="n">snps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-    
-    <span class="n">count</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">snps</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">snp_key</span> <span class="ow">in</span> <span class="n">snps</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">arr_key</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span> 
-            <span class="k">if</span> <span class="n">snp_key</span> <span class="o">==</span> <span class="n">arr_key</span><span class="p">:</span> 
-                <span class="n">count</span><span class="p">[</span><span class="n">snp_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">snp_key</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-                
-    <span class="n">top_snp</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">count</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">top_snp</span>
-
-<span class="c1"># strand</span>
-<span class="k">def</span> <span class="nf">strand</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'A'</span><span class="p">,</span><span class="s1">'C'</span><span class="p">,</span><span class="s1">'T'</span><span class="p">,</span><span class="s1">'G'</span><span class="p">,</span> <span class="s1">'N'</span><span class="p">]</span>
-    <span class="n">rev</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span><span class="s1">'c'</span><span class="p">,</span><span class="s1">'t'</span><span class="p">,</span><span class="s1">'g'</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pos</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">'+'</span>
-    <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rev</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">'-'</span>
-    
-<span class="c1"># grab all snps</span>
-<span class="c1">#def uniqueSNP():</span>
-    <span class="c1"># get the list of SNPs</span>
-    
-    <span class="c1"># split into unique</span>
-    
-
-<span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
-
-    
+<span class="n">toy_vcf</span>
 </pre></div>
 
      </div>
@@ -15378,6 +16303,993 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[293]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>#CHROM</th>
+      <th>POS</th>
+      <th>ID</th>
+      <th>REF</th>
+      <th>ALT</th>
+      <th>QUAL</th>
+      <th>FILTER</th>
+      <th>INFO</th>
+      <th>FORMAT</th>
+      <th>NA00001</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Chr1</td>
+      <td>1100023</td>
+      <td>.</td>
+      <td>G</td>
+      <td>A</td>
+      <td>60</td>
+      <td>PASS</td>
+      <td>.</td>
+      <td>GT</td>
+      <td>0/1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Chr2</td>
+      <td>312000</td>
+      <td>.</td>
+      <td>G</td>
+      <td>A</td>
+      <td>60</td>
+      <td>PASS</td>
+      <td>.</td>
+      <td>GT</td>
+      <td>0/1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Chr2</td>
+      <td>312001</td>
+      <td>.</td>
+      <td>T</td>
+      <td>C</td>
+      <td>55</td>
+      <td>PASS</td>
+      <td>.</td>
+      <td>GT</td>
+      <td>0/1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div id="cell-id=6a05677f" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[294]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Toy Table</span>
+<span class="n">toy_snpeff</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">&#39;../data/toy/toy.snp_effects.tsv&#39;</span><span class="p">)</span>
+<span class="n">toy_snpeff</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[294]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chr_id</th>
+      <th>snp_pos</th>
+      <th>ref_allele</th>
+      <th>alt_allele</th>
+      <th>gene_id</th>
+      <th>mrna_id</th>
+      <th>prot_id</th>
+      <th>strand</th>
+      <th>effect</th>
+      <th>snp_cds_pos</th>
+      <th>codon1_genome_pos</th>
+      <th>codon2_genome_pos</th>
+      <th>codon3_genome_pos</th>
+      <th>snp_aa_pos</th>
+      <th>ref_codon</th>
+      <th>alt_codon</th>
+      <th>ref_aa</th>
+      <th>alt_aa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Chr1</td>
+      <td>1100023</td>
+      <td>G</td>
+      <td>A</td>
+      <td>gene1</td>
+      <td>mrna1</td>
+      <td>prot1</td>
+      <td>+</td>
+      <td>stop_gain</td>
+      <td>21</td>
+      <td>1100021</td>
+      <td>1100022</td>
+      <td>1100023</td>
+      <td>7</td>
+      <td>TGG</td>
+      <td>TGA</td>
+      <td>W</td>
+      <td>*</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Chr2</td>
+      <td>312000</td>
+      <td>G</td>
+      <td>A</td>
+      <td>gene2</td>
+      <td>mrna2</td>
+      <td>prot2</td>
+      <td>+</td>
+      <td>nonsynonymous</td>
+      <td>4</td>
+      <td>312000</td>
+      <td>312001</td>
+      <td>312002</td>
+      <td>2</td>
+      <td>GTA</td>
+      <td>ATA</td>
+      <td>V</td>
+      <td>I</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Chr2</td>
+      <td>312001</td>
+      <td>T</td>
+      <td>C</td>
+      <td>gene2</td>
+      <td>mrna2</td>
+      <td>prot2</td>
+      <td>+</td>
+      <td>nonsynonymous</td>
+      <td>5</td>
+      <td>312000</td>
+      <td>312001</td>
+      <td>312002</td>
+      <td>2</td>
+      <td>GTA</td>
+      <td>GCA</td>
+      <td>V</td>
+      <td>A</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div id="cell-id=2e778eab" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[295]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># if pileup information is . at the previous positions, output the reference, else variant</span>
+<span class="k">def</span> <span class="nf">mergeTab</span><span class="p">(</span><span class="n">mp</span><span class="p">,</span> <span class="n">so</span><span class="p">):</span>
+    <span class="n">sub_mp</span> <span class="o">=</span> <span class="n">mp</span><span class="p">[[</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">,</span> <span class="s1">&#39;pileup&#39;</span><span class="p">]]</span>
+    <span class="n">mdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">so</span><span class="p">,</span> <span class="n">sub_mp</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">)</span><span class="err">$</span>
+    <span class="k">return</span> <span class="n">mdf</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">mergeTab</span><span class="p">(</span><span class="n">mp1</span><span class="p">,</span> <span class="n">toy_snpeff</span><span class="p">)</span>
+
+<span class="n">mp_dict</span> <span class="o">=</span> <span class="n">altDict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div id="cell-id=29b50f2e" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[302]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">getAlt</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Takes mPileup</span>
+<span class="sd">    Out: list of uniqueSNP</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;pileup&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># make upper</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">]]</span>
+
+    <span class="c1"># Get list of unique</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span><span class="p">]</span>
+    <span class="n">a_unique</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> 
+    <span class="n">a_unique</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">a_unique</span><span class="p">)</span>
+
+<span class="c1"># def snpCombo(x):</span>
+    <span class="c1"># &#39;&#39;&#39;</span>
+    <span class="c1"># Creates a combination of SNPs</span>
+    <span class="c1"># Replaces Alt at each position</span>
+    <span class="c1"># &#39;&#39;&#39;</span>
+    <span class="c1"># for snp in a_unique:</span>
+    <span class="c1">#     snp_dict[&#39;snp_pos&#39;] = int(x[&#39;snp_pos&#39;])</span>
+    <span class="c1">#     snp_dict[&#39;varify_alt&#39;] = snp</span>
+
+    <span class="c1">#     df = df.append(snp_dict, ignore_index=True)</span>
+
+
+    <span class="c1">#     snp_dict = {}</span>
+    <span class="c1">#     test = []</span>
+
+    <span class="c1"># df = pd.merge(toy_snpeff, df, on=&#39;snp_pos&#39;)</span>
+
+    <span class="c1"># x = df.apply(axis=1, func=altValidate)</span>
+
+    <span class="c1"># df = x.apply(axis = 1, func=altCombo)</span>
+    <span class="c1"># df = pd.concat(list(df))</span>
+    <span class="c1"># df = pd.merge(x, df, on=&#39;snp_pos&#39;)</span>
+
+    <span class="c1"># reorg = [&#39;chr_id&#39;, &#39;snp_pos&#39;, &#39;ref_allele&#39;, &#39;alt_allele&#39;, </span>
+    <span class="c1">#          &#39;varify_alt&#39;, &#39;VARified&#39;, </span>
+    <span class="c1">#          &#39;codon1_genome_pos&#39;,&#39;codon2_genome_pos&#39;,</span>
+    <span class="c1">#          &#39;codon3_genome_pos&#39;, &#39;ref_codon&#39;, </span>
+    <span class="c1">#          &#39;varify_codon1&#39;, &#39;varify_codon2&#39;, &#39;varify_codon3&#39;,#&#39;flag&#39;</span>
+    <span class="c1">#         ]</span>
+
+    <span class="c1"># return df[reorg]</span>
+
+<span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">codon</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;varify_codon&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="n">table</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ATA&#39;</span><span class="p">:</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;ATC&#39;</span><span class="p">:</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;ATT&#39;</span><span class="p">:</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;ATG&#39;</span><span class="p">:</span><span class="s1">&#39;M&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ACA&#39;</span><span class="p">:</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;ACC&#39;</span><span class="p">:</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;ACG&#39;</span><span class="p">:</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;ACT&#39;</span><span class="p">:</span><span class="s1">&#39;T&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AAC&#39;</span><span class="p">:</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;AAT&#39;</span><span class="p">:</span><span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;AAA&#39;</span><span class="p">:</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="s1">&#39;AAG&#39;</span><span class="p">:</span><span class="s1">&#39;K&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AGC&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;AGT&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;AGA&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;AGG&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span>                
+    <span class="s1">&#39;CTA&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;CTC&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;CTG&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;CTT&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CCA&#39;</span><span class="p">:</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;CCC&#39;</span><span class="p">:</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;CCG&#39;</span><span class="p">:</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;CCT&#39;</span><span class="p">:</span><span class="s1">&#39;P&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CAC&#39;</span><span class="p">:</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;CAT&#39;</span><span class="p">:</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;CAA&#39;</span><span class="p">:</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="s1">&#39;CAG&#39;</span><span class="p">:</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CGA&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;CGC&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;CGG&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;CGT&#39;</span><span class="p">:</span><span class="s1">&#39;R&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GTA&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;GTC&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;GTG&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;GTT&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GCA&#39;</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;GCC&#39;</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;GCG&#39;</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;GCT&#39;</span><span class="p">:</span><span class="s1">&#39;A&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GAC&#39;</span><span class="p">:</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;GAT&#39;</span><span class="p">:</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;GAA&#39;</span><span class="p">:</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;GAG&#39;</span><span class="p">:</span><span class="s1">&#39;E&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GGA&#39;</span><span class="p">:</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;GGC&#39;</span><span class="p">:</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;GGG&#39;</span><span class="p">:</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;GGT&#39;</span><span class="p">:</span><span class="s1">&#39;G&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TCA&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;TCC&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;TCG&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;TCT&#39;</span><span class="p">:</span><span class="s1">&#39;S&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TTC&#39;</span><span class="p">:</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;TTT&#39;</span><span class="p">:</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;TTA&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;TTG&#39;</span><span class="p">:</span><span class="s1">&#39;L&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TAC&#39;</span><span class="p">:</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;TAT&#39;</span><span class="p">:</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;TAA&#39;</span><span class="p">:</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;TAG&#39;</span><span class="p">:</span><span class="s1">&#39;*&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TGC&#39;</span><span class="p">:</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;TGT&#39;</span><span class="p">:</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;TGA&#39;</span><span class="p">:</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;TGG&#39;</span><span class="p">:</span><span class="s1">&#39;W&#39;</span><span class="p">,}</span>
+    
+    <span class="n">x</span><span class="p">[</span><span class="s1">&#39;varify_aa&#39;</span><span class="p">]</span> <span class="o">=</span><span class="n">table</span><span class="p">[</span><span class="n">codon</span><span class="p">]</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">effect</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># missense</span>
+    <span class="c1"># nonsense</span>
+    <span class="n">x</span><span class="p">[</span><span class="s1">&#39;effect&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div id="cell-id=5741b160" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[297]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># x = df.apply(axis=1, func=altValidate)</span>
+
+<span class="c1">#altCombo</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Creates alt codon </span>
+<span class="sd">based on alt allele info</span>
+<span class="sd">from mpileup</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="n">alt_dict</span> <span class="o">=</span> <span class="n">mp_dict</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Check for multi pileup</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_unique</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Warning: Muliple snps&#39;</span><span class="p">)</span>
+    <span class="nb">next</span>
+
+<span class="c1"># Takes the current position of SNP</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">])</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">p3</span><span class="o">-</span><span class="mi">1</span> 
+<span class="n">p1</span> <span class="o">=</span> <span class="n">p2</span><span class="o">-</span><span class="mi">1</span>
+
+
+<span class="n">subDict</span> <span class="o">=</span> <span class="p">{</span><span class="n">p1</span> <span class="p">:</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">p2</span> <span class="p">:</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">p3</span> <span class="p">:</span> <span class="s1">&#39;.&#39;</span><span class="p">}</span>
+
+<span class="c1"># create a dictionary</span>
+<span class="n">ref</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;ref_codon&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># starts from reference</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ref</span><span class="p">]</span>
+<span class="n">snp_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Add values from full dictionary if keys are in sub</span>
+<span class="n">res</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">alt_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">subDict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">subDict</span><span class="p">}</span>
+<span class="n">res</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+
+<span class="c1"># Create combination of alts</span>
+<span class="c1"># at pos3, replace 1; at pos2, replace 2</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">snp_dict</span><span class="p">[</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">snp_dict</span><span class="p">[</span><span class="s1">&#39;varify_alt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">a_unique</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;.&#39;</span><span class="p">:</span>
+        <span class="n">temp</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+        
+    <span class="n">snp_dict</span><span class="p">[</span><span class="s2">&quot;varify_codon&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+    
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">snp_dict</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;snp_pos&#39;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">altValidate</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div id="cell-id=ed002e57" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[300]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">translate</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="c1">#df = effect(df)</span>
+
+<span class="n">reorg</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;chr_id&#39;</span><span class="p">,</span> <span class="s1">&#39;snp_pos&#39;</span><span class="p">,</span> <span class="s1">&#39;ref_allele&#39;</span><span class="p">,</span> <span class="s1">&#39;alt_allele&#39;</span><span class="p">,</span> 
+         <span class="s1">&#39;varify_alt&#39;</span><span class="p">,</span> <span class="s1">&#39;VARified&#39;</span><span class="p">,</span> <span class="s1">&#39;ref_codon&#39;</span><span class="p">,</span> <span class="s1">&#39;varify_codon&#39;</span><span class="p">,</span> <span class="s1">&#39;varify_aa&#39;</span><span class="p">,</span> <span class="c1">#&#39;effect&#39;</span>
+        <span class="p">]</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">reorg</span><span class="p">]</span>
+
+<span class="n">df</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[300]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chr_id</th>
+      <th>snp_pos</th>
+      <th>ref_allele</th>
+      <th>alt_allele</th>
+      <th>varify_alt</th>
+      <th>VARified</th>
+      <th>ref_codon</th>
+      <th>varify_codon</th>
+      <th>varify_aa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Chr1</td>
+      <td>1100023</td>
+      <td>G</td>
+      <td>A</td>
+      <td>A</td>
+      <td>Yes</td>
+      <td>TGG</td>
+      <td>TGA</td>
+      <td>*</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div id="cell-id=edd2fcd3" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[299]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[299]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chr_id</th>
+      <th>snp_pos</th>
+      <th>ref_allele</th>
+      <th>alt_allele</th>
+      <th>gene_id</th>
+      <th>mrna_id</th>
+      <th>prot_id</th>
+      <th>strand</th>
+      <th>effect</th>
+      <th>snp_cds_pos</th>
+      <th>...</th>
+      <th>snp_aa_pos</th>
+      <th>ref_codon</th>
+      <th>alt_codon</th>
+      <th>ref_aa</th>
+      <th>alt_aa</th>
+      <th>ref</th>
+      <th>pileup</th>
+      <th>varify_alt</th>
+      <th>varify_codon</th>
+      <th>VARified</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Chr1</td>
+      <td>1100023</td>
+      <td>G</td>
+      <td>A</td>
+      <td>gene1</td>
+      <td>mrna1</td>
+      <td>prot1</td>
+      <td>+</td>
+      <td>stop_gain</td>
+      <td>21</td>
+      <td>...</td>
+      <td>7</td>
+      <td>TGG</td>
+      <td>TGA</td>
+      <td>W</td>
+      <td>*</td>
+      <td>G</td>
+      <td>...A...A..A..</td>
+      <td>A</td>
+      <td>TGA</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 23 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div id="cell-id=5ff8d3a6" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[270]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;varify_codon&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[270]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>&#39;TGA&#39;</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div id="cell-id=413bb9a6" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Goal-Example">Goal Example<a class="anchor-link" href="#Goal-Example">&#182;</a></h2><table>
+<thead>
+<tr>
+  <th>chr_id</th>
+  <th>snp_pos</th>
+  <th>Ref</th>
+  <th>Pred_Alt</th>
+  <th>Varify_Alt</th>
+  <th>VARified</th>
+  <th>ref_codon</th>
+  <th>varify_codon</th>
+  <th>aa</th>
+  <th>effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Chr1</td>
+  <td>1100023</td>
+  <td>G</td>
+  <td>A</td>
+  <td>A</td>
+  <td>Yes</td>
+  <td>TGG</td>
+  <td>TGA</td>
+  <td>*</td>
+  <td>stop_gain</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-id=bfd7e130" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Case-2:-Multi-substitution-case">Case 2: Multi-substitution case<a class="anchor-link" href="#Case-2:-Multi-substitution-case">&#182;</a></h1>
+</div>
+</div>
+</div>
+</div><div id="cell-id=26b47f42" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[316]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mp2</span> <span class="o">=</span> <span class="n">readMP</span><span class="p">(</span><span class="s1">&#39;../data/toy/toy_mpileup.txt&#39;</span><span class="p">)</span>
+<span class="n">mp2</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[316]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>snp_pos</th>
+      <th>ref</th>
+      <th>3</th>
+      <th>pileup</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Chr2</td>
+      <td>312000</td>
+      <td>G</td>
+      <td>12</td>
+      <td>.A.A</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Chr2</td>
+      <td>312001</td>
+      <td>T</td>
+      <td>13</td>
+      <td>..C</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Chr2</td>
+      <td>312002</td>
+      <td>A</td>
+      <td>13</td>
+      <td>...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div id="cell-id=174b97ae" class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[317]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">&#39;../data/toy/toy.snp_effects.tsv&#39;</span><span class="p">)</span> <span class="c1"># toy_snpeff</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[317]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>chr_id</th>
+      <th>snp_pos</th>
+      <th>ref_allele</th>
+      <th>alt_allele</th>
+      <th>gene_id</th>
+      <th>mrna_id</th>
+      <th>prot_id</th>
+      <th>strand</th>
+      <th>effect</th>
+      <th>snp_cds_pos</th>
+      <th>codon1_genome_pos</th>
+      <th>codon2_genome_pos</th>
+      <th>codon3_genome_pos</th>
+      <th>snp_aa_pos</th>
+      <th>ref_codon</th>
+      <th>alt_codon</th>
+      <th>ref_aa</th>
+      <th>alt_aa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Chr1</td>
+      <td>1100023</td>
+      <td>G</td>
+      <td>A</td>
+      <td>gene1</td>
+      <td>mrna1</td>
+      <td>prot1</td>
+      <td>+</td>
+      <td>stop_gain</td>
+      <td>21</td>
+      <td>1100021</td>
+      <td>1100022</td>
+      <td>1100023</td>
+      <td>7</td>
+      <td>TGG</td>
+      <td>TGA</td>
+      <td>W</td>
+      <td>*</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Chr2</td>
+      <td>312000</td>
+      <td>G</td>
+      <td>A</td>
+      <td>gene2</td>
+      <td>mrna2</td>
+      <td>prot2</td>
+      <td>+</td>
+      <td>nonsynonymous</td>
+      <td>4</td>
+      <td>312000</td>
+      <td>312001</td>
+      <td>312002</td>
+      <td>2</td>
+      <td>GTA</td>
+      <td>ATA</td>
+      <td>V</td>
+      <td>I</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Chr2</td>
+      <td>312001</td>
+      <td>T</td>
+      <td>C</td>
+      <td>gene2</td>
+      <td>mrna2</td>
+      <td>prot2</td>
+      <td>+</td>
+      <td>nonsynonymous</td>
+      <td>5</td>
+      <td>312000</td>
+      <td>312001</td>
+      <td>312002</td>
+      <td>2</td>
+      <td>GTA</td>
+      <td>GCA</td>
+      <td>V</td>
+      <td>A</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div id="cell-id=fe13a88f" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Goal-Example">Goal Example<a class="anchor-link" href="#Goal-Example">&#182;</a></h2><table>
+<thead>
+<tr>
+  <th>chr_id</th>
+  <th>snp_pos</th>
+  <th>Ref</th>
+  <th>Pred_Alt</th>
+  <th>Varify_Alt</th>
+  <th>VARified</th>
+  <th>ref_codon</th>
+  <th>varify_codon</th>
+  <th>aa</th>
+  <th>effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Chr2</td>
+  <td>312002</td>
+  <td>G</td>
+  <td>A</td>
+  <td>A</td>
+  <td>Yes</td>
+  <td>TGG</td>
+  <td>TGA</td>
+  <td>*</td>
+  <td>stop_gain</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </div>
 </body>
 

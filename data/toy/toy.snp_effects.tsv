@@ -1,0 +1,5 @@
+chr_id	snp_pos	ref_allele	alt_allele	gene_id	mrna_id	prot_id	strand	effect	snp_cds_pos	codon1_genome_pos	codon2_genome_pos	codon3_genome_pos	snp_aa_pos	ref_codon	alt_codon	ref_aa	alt_aa
+Chr1	1100023	G	A	gene1	mrna1	prot1	+	stop_gain	21	1100021	1100022	1100023	7	TGG	TGA	W	*
+Chr2	312000	G	A	gene2	mrna2	prot2	+	nonsynonymous	4	312000	312001	312002	2	GTA	ATA	V	I
+Chr2	312001	T	C	gene2	mrna2	prot2	+	nonsynonymous	5	312000	312001	312002	2	GTA	GCA	V	A
+Chr2	312002	A
