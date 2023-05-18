@@ -46,4 +46,4 @@ if __name__ == "__main__":
     df = utils.varify(x, mp)
 
     # create report csv
-    print(df)
+    df.to_csv('varify_report.csv', header=True)
