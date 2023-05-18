@@ -7,8 +7,8 @@
 * **Utility File:** `script/utility.py`
 
 ## How to use
-* `--in_mp` mpileup file in txt format
-* `--in_so` snpeff-like table in txt format
+* `--in_pileup` mpileup file in txt format
+* `--in_snpeff` snpeff-like table in txt format
 
 ```commandline
 run '../script/main.py' --in_pileup <mpileup_file> --in_snpeff <snpefftable_file>
