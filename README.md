@@ -11,5 +11,5 @@
 * `--in_so` snpeff-like table in txt format
 
 ```commandline
-run '../script/main.py' --in_mp <mpileup_file> --in_so <snpefftable_file>
+run '../script/main.py' --in_pileup <mpileup_file> --in_snpeff <snpefftable_file>
 ```
