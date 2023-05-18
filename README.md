@@ -11,5 +11,5 @@
 * `--in_snpeff` snpeff-like table in txt format
 
 ```commandline
-run '../script/main.py' --in_pileup <mpileup_file> --in_snpeff <snpefftable_file>
+python3 '../script/main.py' --in_pileup <mpileup_file> --in_snpeff <snpefftable_file>
 ```
