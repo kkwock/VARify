@@ -57,6 +57,7 @@ def snpDict(x):
             if p in pos:
                 pos_check = True
                 pos_dict = {key: alt_dict.get(key, subDict[key]) for key in pos_list}
+                pos_dict = {key: val for key, val in pos_dict.items() if val != '.'}
 
     # starts from reference
     ref = list(x['ref_codon'])
@@ -151,8 +152,9 @@ def getAlt(x):
         a_unique = pd.DataFrame(a_unique)
 
         # Get the max snp
-        nt = a_unique.groupby([0]).apply(lambda x: x.value_counts().index[0])[0]
-        nt = nt[0]
+        # nt = a_unique.groupby([0]).apply(lambda x: x.value_counts().index[0])[0]
+        # nt = nt[0]
+        nt = pd.value_counts(a_unique[0].values.flatten()).index[0]
         x['varify_allele'] = nt.upper()
 
     return x
