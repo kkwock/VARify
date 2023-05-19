@@ -4,13 +4,12 @@
 import warnings
 import pandas as pd
 
-
 asciiDict = {chr(i): (i - 33) for i in range(33, 74)}
 
 
 def varify(x, mp):
     # dictionary of alternate codons from pileup
-    alt_dict = altDict(mp)
+    # alt_dict = altDict(mp)
 
     # running the script
     snp_df = x.apply(axis=1, func=snpDict)
@@ -28,13 +27,15 @@ def varify(x, mp):
              'prot_id', 'strand', 'effect', 'snp_cds_pos', 'codon1_genome_pos',
              'codon2_genome_pos', 'codon3_genome_pos', 'snp_aa_pos', 'ref_codon',
              'alt_codon', 'ref_aa', 'alt_aa',  # 'ref',
+             'pos1_pileup', 'pos2_pileup', 'pos3_pileup',
              'varify_codon', 'varify_allele',
              'varify_aa', 'nt_VARified', 'codon_VARified', 'aa_VARified', 'comment']
     return df[reorg]
 
+
 def snpDict(x):
     # import itertools # for permutations
-
+    # print(x.snp_pos)
     # Takes the current position of SNP
     p3 = int(x.codon3_genome_pos)
     p2 = int(x.codon2_genome_pos)
@@ -47,12 +48,16 @@ def snpDict(x):
 
     pos_check = False
     pos_list = [p1, p2, p3]
+    #     print(pos_list)
+    #     print(subDict)
+
     # If there are any differences between RNA & DNA, return position
     if pos != False:
-        for p in pos:
-            if p in pos_list:
+        for p in pos_list:
+            if p in pos:
                 pos_check = True
-                pos_dict = {key: alt_dict.get(key, subDict[key]) for key in pos}
+                pos_dict = {key: alt_dict.get(key, subDict[key]) for key in pos_list}
+                pos_dict = {key: val for key, val in pos_dict.items() if val != '.'}
 
     # starts from reference
     ref = list(x['ref_codon'])
@@ -66,7 +71,12 @@ def snpDict(x):
     # create pileup in df
     for i in range(len(pos_list)):
         cname = ['pos1_pileup', 'pos2_pileup', 'pos3_pileup']
-        snp_dict[cname[i]] = mp[mp.snp_pos == pos_list[i]].pileup.tolist()[0]
+
+        try:
+            snp_dict[cname[i]] = mp[mp.snp_pos == pos_list[i]].pileup.tolist()[0]
+        except:
+            # if the pileup does not have info, replace with *
+            snp_dict[cname[i]] = "*"
 
     # MultiFlag for complex codons
     if (list(res)).count(".") < 2:
@@ -90,10 +100,15 @@ def snpDict(x):
         current_pos = int(x['snp_pos'])
         idx = list(subDict.keys()).index(current_pos)
         # get ref
-        ref[idx] = alt_dict[current_pos]
+        try:
+            ref[idx] = alt_dict[current_pos]
+            snp_dict['varify_allele'] = alt_dict[int(current_pos)]  # fill with current pos snp
+        except:
+            ref[idx] = x.ref_allele
+            snp_dict['varify_allele'] = x.ref_allele
+
         snp_dict['varify_codon'] = ''.join(ref)
         snp_dict['snp_pos'] = x['snp_pos']
-        snp_dict['varify_allele'] = alt_dict[int(current_pos)]  # fill with current pos snp
         snp_dict['comment'] = comment
 
     snp_df = pd.DataFrame([snp_dict])
@@ -101,37 +116,46 @@ def snpDict(x):
     return snp_df
 
 
+def has_numbers(inputString):
+    return any(char.isdigit() for char in inputString)
+
+
 def getAlt(x):
+    indel = has_numbers(x.pileup)
     l = list(x['pileup'])
     nts = ['A', 'C', 'T', 'G']
 
     # check if indel, then skip
-    for i in l:
-        if i.isnumeric():
-            indel = True
-            x['varify_allele'] = None
-            break
-        else:
-            indel = False
+    while indel == True:
+        for i in l:
+            if i.isnumeric():
+                string = ''.join(l)
+                n = int(i)
+                idx = l.index(i)
+                r = range(idx - 1, idx + n + 1)
+                pat = ''.join(l[r[0]:r[-1] + 1])
+                string = string.replace(pat, '')
+        l = [i for i in string]
+        indel = has_numbers(string)
 
-    if indel == False:
-        l = [i for i in l if i.isalpha()]
-        l = [i for i in l if i.upper() in nts]
+    l = [i for i in l if i.isalpha()]
+    l = [i for i in l if i.upper() in nts]
 
-        if len(l) == 0:
-            x['varify_allele'] = None
-        else:
-            # Get list of unique
-            a = [i for i in l]
-            a_unique = list(set(a))
+    if len(l) == 0:
+        x['varify_allele'] = None
+    else:
+        # Get list of unique
+        a = [i for i in l]
+        a_unique = list(set(a))
 
-            # getting max alt
-            a_unique = pd.DataFrame(a_unique)
+        # getting max alt
+        a_unique = pd.DataFrame(a_unique)
 
-            # Get the max snp
-            nt = a_unique.groupby([0]).apply(lambda x: x.value_counts().index[0])[0]
-            nt = nt[0]
-            x['varify_allele'] = nt.upper()
+        # Get the max snp
+        # nt = a_unique.groupby([0]).apply(lambda x: x.value_counts().index[0])[0]
+        # nt = nt[0]
+        nt = pd.value_counts(a_unique[0].values.flatten()).index[0]
+        x['varify_allele'] = nt.upper()
 
     return x
 
@@ -152,10 +176,10 @@ def checkRNADict(x, mp):
     mp_dict = altDict(mp)  # for RNA
 
     if str(set(mp_dict) - set(x_dict)) == 'set()':
-        return False
+        return False, mp_dict
     else:
         # returns position difference from RNA
-        return list(set(mp_dict) - set(x_dict))
+        return list(set(mp_dict) - set(x_dict)), mp_dict
 
 
 def readMP(x):
