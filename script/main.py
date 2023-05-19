@@ -41,7 +41,7 @@ if __name__ == "__main__":
     so = pd.read_table(ARGS.in_snpeff)
 
     x = utils.mergeTab(mp, so)
-    pos = utils.checkRNADict(x, mp)
+    pos, alt_dict = utils.checkRNADict(x, mp)
 
     df = utils.varify(x, mp)
 
