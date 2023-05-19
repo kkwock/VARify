@@ -1,3 +1,6 @@
+python >= 3.9.16
 biopython
 re
 sys
+pandas
+numpy
