@@ -55,9 +55,10 @@ def snpDict(x):
     if pos != False:
         for p in pos_list:
             if p in pos:
+                # only add p into pos_dict
                 pos_check = True
-                pos_dict = {key: alt_dict.get(key, subDict[key]) for key in pos_list}
-                pos_dict = {key: val for key, val in pos_dict.items() if val != '.'}
+                pos_dict = {p: alt_dict.get(p)}
+                # pos_dict = {key:val for key, val in pos_dict.items() if val != '.'}
 
     # starts from reference
     ref = list(x['ref_codon'])
@@ -307,3 +308,11 @@ def flatten(d, parent_key='', sep='_'):
         else:
             items.append((new_key, v))
     return dict(items)
+
+# import itertools
+
+# permutations = list(itertools.product(["A","G"], ["T","C"], ["A"]))
+
+# print(permutations)
+
+# ["".join(x) for x in permutations]
