@@ -5,6 +5,22 @@ import warnings
 import pandas as pd
 
 asciiDict = {chr(i): (i - 33) for i in range(33, 74)}
+ntRevDict = {"A": "T",
+             "T": "A",
+             "G": "C",
+             "C": "G"}
+
+
+def snpCheck(strand, snp):
+    '''
+    Checks for pos/neg strand
+    returns SNP
+    '''
+
+    if strand == '-':
+        return ntRevDict.get(snp)
+    else:
+        return snp
 
 
 def varify(x, mp):
@@ -57,7 +73,9 @@ def snpDict(x):
             if p in pos:
                 # only add p into pos_dict
                 pos_check = True
+                # snp = snpCheck(x.strand, alt_dict.get(p))
                 pos_dict = {p: alt_dict.get(p)}
+                # print(pos_dict)
                 # pos_dict = {key:val for key, val in pos_dict.items() if val != '.'}
 
     # starts from reference
@@ -102,10 +120,10 @@ def snpDict(x):
         idx = list(subDict.keys()).index(current_pos)
         # get ref
         try:
-            ref[idx] = alt_dict[current_pos]
-            snp_dict['varify_allele'] = alt_dict[int(current_pos)]  # fill with current pos snp
+            ref[idx] = snpCheck(x.strand, alt_dict[current_pos])
+            snp_dict['varify_allele'] = alt_dict[current_pos]  # fill with current pos snp
         except:
-            ref[idx] = x.ref_allele
+            ref[idx] = snpCheck(x.strand, x.ref_allele)
             snp_dict['varify_allele'] = x.ref_allele
 
         snp_dict['varify_codon'] = ''.join(ref)
@@ -147,15 +165,17 @@ def getAlt(x):
     else:
         # Get list of unique
         a = [i for i in l]
-        a_unique = list(set(a))
+        a = pd.DataFrame(a)
+        # a_unique = list(set(a))
 
         # getting max alt
-        a_unique = pd.DataFrame(a_unique)
+        # a_unique = pd.DataFrame(a_unique)
 
         # Get the max snp
         # nt = a_unique.groupby([0]).apply(lambda x: x.value_counts().index[0])[0]
         # nt = nt[0]
-        nt = pd.value_counts(a_unique[0].values.flatten()).index[0]
+        # nt = pd.value_counts(a_unique[0].values.flatten()).index[0]
+        nt = pd.value_counts(a.values.flatten()).index[0]
         x['varify_allele'] = nt.upper()
 
     return x
