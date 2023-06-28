@@ -72,7 +72,7 @@ def snpDict(x):
     pos_check = False
     pos_list = [p1, p2, p3]
     #     print(pos_list)
-    print(subDict)
+    # print(subDict)
 
     # If there are any differences between RNA & DNA, return position
     if pos != False:
@@ -283,7 +283,7 @@ def aaVarify(x, y):
 
 def codonVarify(x, y):
     return 'Yes' if x == y else 'No'
-
+    
 
 
 def translate(x):
@@ -431,7 +431,7 @@ def main2():
 
         print('aa validating...')
         df['aa_VARified'] = list(tqdm.tqdm(pool.map(validate, df.varify_aa, df.alt_aa, chunksize=10), total=df.shape[0]))
-
+    
     return df
 
 # Process the rows in chunks in parallel
@@ -455,12 +455,19 @@ if __name__ == '__main__':
 
     snp_df = x.apply(axis=1, func=snpDict)
     snp_df = pd.concat(list(snp_df))
+
     snp_df.to_csv('/scratch/kk4764/VARify/snp_df.csv')
+    x= x.drop(columns='varify_allele', axis=1)
 
     df = pd.merge(x, snp_df, on='snp_pos')
+    df.to_csv('/scratch/kk4764/VARify/df.csv')
+    
+    print("X cols: ", x.columns)
+    print("SNPDF cols: ", snp_df.columns)
+    print("DF Columns:", df.columns)
 
     # Add the dictionary
     main2()
-
+    
     df = df.drop(columns='pileup', axis=1)
     df.to_csv('/scratch/kk4764/VARify/varify_df.csv')
