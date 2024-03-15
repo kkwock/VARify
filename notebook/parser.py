@@ -1,5 +1,6 @@
 import argparse
 import pandas as pd
+from multiprocessing import Pool, cpu_count
 
 # Define the remove_softclip function
 def remove_softclip(s):
@@ -7,7 +8,7 @@ def remove_softclip(s):
         s = s[1:]
     return s
 
-def main(input_file):
+def process_file(input_file):
     # Read the CSV file into a DataFrame
     s2p_out = pd.read_csv(input_file, header=None)
 
@@ -27,18 +28,37 @@ def main(input_file):
     # Rename the columns
     result_df.columns = ['QNAME', 'RNAME', 'POS', 'TLEN', 'SEQ']
 
-    # Print the result DataFrame
-    print(result_df)
+    # Return the result DataFrame
+    return result_df
+
+def main(input_file):
+    # Determine the number of CPUs to use for multiprocessing
+    num_cpus = cpu_count()
+
+    # Create a Pool of workers
+    pool = Pool(processes=num_cpus)
+
+    # Process the input file using multiple processes
+    result_dfs = pool.map(process_file, [input_file])
+
+    # Close the pool of workers
+    pool.close()
+
+    # Concatenate the result DataFrames (there's only one in this case)
+    final_result = pd.concat(result_dfs)
+
+    # Print the final result DataFrame
+    return final_result
 
 if __name__ == "__main__":
     # Create argument parser
-    parser = argparse.ArgumentParser(description="sam2pair file")
+    parser = argparse.ArgumentParser(description="Process sam2pair_5Entry.out file")
 
     # Add arguments
-    parser.add_argument("i", type=str, help="Path to the input *.out file")
+    parser.add_argument("input_file", type=str, help="Path to the input *.out file")
 
     # Parse arguments
     args = parser.parse_args()
 
     # Call the main function with input_file as argument
-    main(args.i)
+    main(args.input_file)
