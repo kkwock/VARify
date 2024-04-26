@@ -62,3 +62,4 @@ if __name__ == "__main__":
 
     # Call the main function with input_file as argument
     main(args.input_file)
+ # type: ignore
