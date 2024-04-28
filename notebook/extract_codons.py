@@ -2,7 +2,7 @@ import pandas as pd
 import re
 import argparse
 import json
-import datetime
+from datetime import datetime
 import concurrent.futures
 import multiprocessing
 import pickle
@@ -42,7 +42,7 @@ def sam2pair_extract(s2p_out):
     result_df = result_df[result_df['FLAG_EXPLAINED'].apply(lambda x: x.get('read_unmapped', False) != True)]
 
 
-    return result_df[['QNAME', 'FLAG', 'CHR', 'POS', 'POS_END', 'MAPQ', 'SOFTCLIP', 'SEQ', 'REF']]
+    return result_df[['QNAME', 'FLAG', 'CHR', 'POS', 'POS_END', 'MAPQ', 'SOFTCLIP', 'SEQ', 'REF', 'FLAG_EXPLAINED']]
 
 
 def sam_flag_explainer(flag:int):
@@ -281,7 +281,7 @@ def var_split(x):
     return x
 
 def main(args):
-
+    date = datetime.now()
     s2pout = args.sam2pairwise
     snpeff = args.snpeff
 
@@ -291,6 +291,7 @@ def main(args):
 
     # extract sam2pairwise data
     result_df = sam2pair_extract(s2p)
+    result_df.to_csv(f"{date.strftime('%y%m%d_%f')}_sam2pair_table.csv", index=False)
 
     # Subset snpeff-table data
     sub = ['chr_id', 'snp_pos', 'codon1_genome_pos', 'codon2_genome_pos', 'codon3_genome_pos', 'strand']
@@ -315,10 +316,8 @@ def main(args):
 
     snpeff_table = snpeff_table.apply(is_varify, axis=1)
 
-    snpeff_table = snpeff_table.apply(var_split, axis=1)
-
     # output report
-    snpeff_table.to_csv(f"{date.strftime("%y%m%d_%f")}_varify_report.csv", index=False)
+    snpeff_table.to_csv(f"{date.strftime('%y%m%d_%f')}_varify_report.csv", index=False)
 
 
 if __name__ == '__main__':
