@@ -1,0 +1,242 @@
+'''
+VARify
+'''
+
+import datetime
+import json
+import argparse
+
+
+# USER INPUTS
+PARSER = argparse.ArgumentParser(description='VARify Extract Codons')
+PARSER.add_argument('--bam', type=str, required=True)
+PARSER.add_argument('--snpeff', type=str, required=True)
+args = PARSER.parse_args()
+
+BAM=args.bam
+SNPEFF=args.snpeff # Would like to update to include SNPEFF raw input (GFF & FASTQ)
+
+# TIMESTAMP
+DATE=datetime.datetime.strptime(str(config["date"]), "%y%m%d%H%M%S")
+
+# OUTPUT
+analysis_dir = "varify_output"
+#print(f"Writing output to: {analysis_dir}")
+Path(analysis_dir).mkdir(parents=True, exist_ok=True)
+
+# UPDATE OUTPUT PATH LOCATION
+config["output_path"] = analysis_dir
+
+# OUTPUT CONFIG FILE FOR RUN
+with open(Path(analysis_dir) / 'run_config.json', 'w', encoding='utf-8') as f:
+    json.dump(config, f, ensure_ascii=False, indent=4)
+
+
+workdir: analysis_dir
+
+# Rules
+localrules: all
+
+rule all:
+    input:
+
+rule sam2pairwise:
+    input:
+    output:
+        s2pout=f"sam2pairwise_table.out"
+    shell:
+        """sam2pairwise < {input.BAM} > {output.s2pout}
+
+rule create_json:
+    input:
+        sam2pairwise=
+        snpeff=SNPEFF
+    params:
+    output:
+        json='codon.json'
+    shell:
+        """python3 {params.script_dir}/index_oligo_qc.py create_report """
+        """--fcid {params.fcid} """
+        """--sam2pairwise {input.sam2pairwise} """
+        """--snpeff {input.snpeff} """
+        """--output_file {output.json} """
+
+rule extract_codons: 
+    input: 
+        json=
+        snpeff=SNPEFF
+    output:
+    shell: 
+
+
+
+rule create report:
+
+rule create_report:
+    input:
+        manifest=f"{analysis_dir}/{LOT}_EIO_oligo_samples.csv",
+        cc_file=f"{analysis_dir}/{LOT}_EIO_QC_contamination.csv",
+        perf_file=f"{analysis_dir}/{LOT}_EIO_QC_performance_metrics.csv",
+        seq_stats=f"{SEQ_DIR}/RunCompletionStatus.xml",
+        ntc_file=f"{analysis_dir}/{LOT}_EIO_QC_ntc.csv",
+        threshold=config["thresholds"],
+        ntc_input=TS_CSV,
+    output:
+        report=f"{analysis_dir}/{LOT}_EIO_QC_report_{nowstr}.csv"
+    params:
+        seq_dir=SEQ_DIR,
+        fcid=FC_ID,
+        lot=LOT,
+        part=PART,
+        url=config["url"],
+        script_dir=config['script_dir']
+    shell:
+        """python3 {params.script_dir}/index_oligo_qc.py create_report """
+        """--fcid {params.fcid} """
+        """--manifest {input.manifest} """
+        """--lot {params.lot} """
+        """--part {params.part} """
+        """--seq_dir {params.seq_dir} """
+        """--cc_file {input.cc_file} """
+        """--perf_file {input.perf_file} """
+        """--ntc_file {input.ntc_file} """
+        """--ntc_input {input.ntc_input} """
+        """--output_file {output.report} """
+        """--threshold {input.threshold} """
+        """--url {params.url}"""
+
+rule calc_ntc:
+    input:
+        input_csv=TS_CSV
+    output:
+        ntc_file=f"{analysis_dir}/{LOT}_EIO_QC_ntc.csv"
+    params:
+        lot=LOT,
+        out_dir=analysis_dir,
+        script_dir=config['script_dir']
+    priority: 4
+    shell:
+        """python3 {params.script_dir}/index_oligo_qc.py calc_ntc """
+        """--input_csv {input.input_csv} """
+        """--lot {params.lot} """
+        """--output_path {params.out_dir}"""
+
+rule calc_performance:
+    input:
+        manifest=f"{analysis_dir}/{LOT}_EIO_oligo_samples.csv",
+        read_counts=f"{analysis_dir}/EIO_oligo_read_counts.csv"
+    output:
+        perf_file=f"{analysis_dir}/{LOT}_EIO_QC_performance_metrics.csv"
+    params:
+        lot=LOT,
+        plate=PLATE,
+        out_dir=analysis_dir,
+        script_dir=config['script_dir']
+    shell:
+        """python3 {params.script_dir}/index_oligo_qc.py calc_perf """
+        """--lot {params.lot} """
+        """--plate {params.plate} """
+        """--manifest {input.manifest} """
+        """--read_counts {input.read_counts} """
+        """--output_path {params.out_dir}"""
+
+rule calc_cross_contam:
+    input:
+        read_counts=f"{analysis_dir}/EIO_oligo_read_counts.csv",
+        manifest=f"{analysis_dir}/{LOT}_EIO_oligo_samples.csv",
+        eio_map=config["eio_map"],
+        oligo_map=config["oligo_map"]
+    output:
+        cc_file=f"{analysis_dir}/{LOT}_EIO_QC_contamination.csv"
+    params:
+        lot=LOT,
+        plate=PLATE,
+        out_dir=analysis_dir,
+        script_dir=config['script_dir'],
+        slope=SLOPE,
+        intercept=INTERCEPT
+    shell:
+        """python3 {params.script_dir}/index_oligo_qc.py calc_contam """
+        """--lot {params.lot} """
+        """--plate {params.plate} """
+        """--read_counts {input.read_counts} """
+        """--manifest {input.manifest} """
+        """--output_path {params.out_dir} """
+        """--slope {params.slope} """
+        """--intercept {params.intercept} """
+        """--eio_plate_map {input.eio_map} """
+        """--oligo_plate_map {input.oligo_map}"""
+
+rule count_reads:
+    input:
+        manifest=f"{analysis_dir}/{LOT}_EIO_oligo_samples.csv",
+        stats=f"{analysis_dir}/FASTQ/Stats/Stats.json"
+    output:
+        read_counts=f"{analysis_dir}/EIO_oligo_read_counts.csv"
+    params:
+        threads=THREADS,
+        out_dir=analysis_dir,
+        mode=config["mode"],
+        script_dir=config['script_dir']
+    shell:
+        """python3 {params.script_dir}/index_oligo_qc.py count_reads """
+        """--manifest {input.manifest} """
+        """--threads {params.threads} """
+        """--output_path {params.out_dir} """
+        """--mode {params.mode}"""
+
+rule demux:
+    input:
+        samp_sheet=f"{analysis_dir}/SampleSheet.csv"
+    output:
+        stats=f"{analysis_dir}/FASTQ/Stats/Stats.json"
+    params:
+        threads=THREADS,
+        seq_dir=SEQ_DIR,
+        out_dir=analysis_dir
+    shell:
+        """bcl2fastq """
+        """--runfolder-dir {params.seq_dir} """
+        """--interop-dir {params.out_dir}/InterOp """
+        """--sample-sheet {input.samp_sheet} """
+        """--barcode-mismatches 0 """
+        """--output-dir {params.out_dir}/FASTQ """
+        """--loading-threads {params.threads} """
+        """--processing-threads {params.threads} """
+        """--writing-threads {params.threads} """
+        """--no-lane-splitting 2> {params.out_dir}/bcl2fastq.log"""
+
+rule create_sample_sheet:
+    input:
+        eio_map=config["eio_map"]
+    output:
+        samp_sheet=f"{analysis_dir}/SampleSheet.csv"
+    params:
+        out_dir=analysis_dir,
+        script_dir=config['script_dir']
+    shell:
+        """python3 {params.script_dir}/index_oligo_qc.py create_samp_sheet """
+        """--manifest {input.eio_map} """
+        """--output_path {params.out_dir}"""
+
+rule create_manifest:
+    input:
+        layout_csv=LAYOUT,
+        eio_map=config["eio_map"],
+        oligo_map=config["oligo_map"]
+    output:
+        manifest=f"{analysis_dir}/{LOT}_EIO_oligo_samples.csv"
+    params:
+        out_dir=analysis_dir,
+        script_dir=config['script_dir'],
+        lot=LOT,
+        plate=PLATE
+    priority: 2
+    shell:
+        """python3 {params.script_dir}/index_oligo_qc.py create_manifest """
+        """--lot {params.lot} """
+        """--plate {params.plate} """
+        """--layout {input.layout_csv} """
+        """--eio_plate_map {input.eio_map} """
+        """--oligo_plate_map {input.oligo_map} """
+        """--output_path {params.out_dir}"""
