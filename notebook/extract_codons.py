@@ -7,7 +7,6 @@ import concurrent.futures
 import multiprocessing
 import pickle
 
-
 def sam2pair_extract(s2p_out):
     # Extract every 1st 2nd and 4th entry into separate DataFrames
     col1 = s2p_out.iloc[::4].reset_index(drop=True)
@@ -41,6 +40,11 @@ def sam2pair_extract(s2p_out):
     #Drop unmapped
     result_df = result_df[result_df['FLAG_EXPLAINED'].apply(lambda x: x.get('read_unmapped', False) != True)]
 
+    # Drop supplementary
+    result_df = result_df[result_df['FLAG_EXPLAINED'].apply(lambda x: x.get('supplementary_alignment', False) != True)]
+
+    # Drop secondary
+    result_df = result_df[result_df['FLAG_EXPLAINED'].apply(lambda x: x.get('not_primary_alignment', False) != True)]
 
     return result_df[['QNAME', 'FLAG', 'CHR', 'POS', 'POS_END', 'MAPQ', 'SOFTCLIP', 'SEQ', 'REF', 'FLAG_EXPLAINED']]
 
@@ -107,27 +111,37 @@ def remove_softclip(row, type = ['SEQ', 'REF']):
     else:
         return ref_value
 
-def codon_perc(codons, sort_by_percentage=True):
+def codon_perc(codons, sort=True):
     perc = {}
+    counts = {}
 
     for chr_id, targets in codons.items():
         perc[chr_id] = {}
+        counts[chr_id] = {}
+
         for target, codon_info in targets.items():
+            
             perc[chr_id][target] = {'percentage': {}}
+            counts[chr_id][target] = {'counts': {}}
+            
             codons_list = list(codon_info['codons'])
+            
             codon_counts = {}
 
             for c1 in codons_list:
+                c1 = c1.upper()
                 codon_counts[c1] = codon_counts.get(c1, 0) + 1
 
             for c2, count in codon_counts.items():
                 percentage = (count / sum(codon_counts.values())) * 100
                 perc[chr_id][target]['percentage'][c2] = percentage
+                counts[chr_id][target]['counts'][c2] = count
 
-            if sort_by_percentage:
+            if sort:
                 perc[chr_id][target]['percentage'] = dict(sorted(perc[chr_id][target]['percentage'].items(), key=lambda x: x[1], reverse=True))
+                counts[chr_id][target]['counts'] = dict(sorted(counts[chr_id][target]['counts'].items(), key=lambda x: x[1], reverse=True))
 
-    return perc
+    return {'perc': perc, 'counts': counts}
 
 def get_codons(row, snpeff_json, codons):
     '''
@@ -139,6 +153,7 @@ def get_codons(row, snpeff_json, codons):
     '''
     start = int(row['POS']) - 1
     chr_id = row['CHR']
+    row['SEQ'] = row['SEQ'].lower() if row['FLAG_EXPLAINED'].get('read_reverse_strand', False) else row['SEQ']
 
     # Check if chr_id exists in the dictionary
     if chr_id not in codons:
@@ -209,7 +224,8 @@ def get_pos(x, target):
 
     return index
 
-def varify_codons(snpeff_table, codons):
+def varify_codons(snpeff_table, codons, type = ['perc', 'counts']):
+    codons = codons[type]
     chr_id = snpeff_table['chr_id']
     snp_pos = str(snpeff_table['snp_pos'])
 
@@ -217,9 +233,9 @@ def varify_codons(snpeff_table, codons):
 
     if chr_id in codons.keys():
         if snp_pos in codons[chr_id].keys():
-            snpeff_table['varify_codons'] = codons[chr_id][snp_pos]['percentage']
+            snpeff_table['varify_codons'] = codons[chr_id][snp_pos][type]
+            
     return snpeff_table
-
 
 def to_json(snpeff_df):
     json_data = {}
@@ -291,8 +307,8 @@ def main(args):
 
     # extract sam2pairwise data
     result_df = sam2pair_extract(s2p)
-    result_df.to_csv(f"{date.strftime('%y%m%d_%f')}_sam2pair_table.csv", index=False)
-
+    result_df.to_csv(f"{date.strftime('%y%m%d_%f')}_sam2pair_table.csv", index=False) # can create option 
+        
     # Subset snpeff-table data
     sub = ['chr_id', 'snp_pos', 'codon1_genome_pos', 'codon2_genome_pos', 'codon3_genome_pos', 'strand']
     snpeff_df = snpeff_table[sub]
@@ -310,9 +326,9 @@ def main(args):
         codons = get_codons(row, snpeff_json, codons)
 
     # add codon percentages to snpeff_table
-    perc = codon_perc(codons)
+    codon_info = codon_perc(codons)
     
-    snpeff_table = snpeff_table.apply(varify_codons, codons=perc, axis=1)
+    snpeff_table = snpeff_table.apply(varify_codons, codons=codon_info, type = 'counts', axis=1)
 
     snpeff_table = snpeff_table.apply(is_varify, axis=1)
 
